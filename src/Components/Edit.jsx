@@ -200,3 +200,12 @@ const Edit = () => {
   );
 };
 export default Edit;
+
+// permite editar la información de un usuario almacenado en Firestore. Utiliza useState para gestionar los campos del formulario y useEffect para obtener los datos del usuario al cargar el componente.
+// Configura hooks para la navegación (useNavigate) y para obtener parámetros de la URL (useParams).
+// updateUser: Maneja el envío del formulario de edición. Prepara los datos actualizados del usuario. Actualiza el documento del usuario en Firestore.
+// getUserById: Obtiene los datos del usuario por su ID desde Firestore.- erifica si el documento existe y actualiza los estados con los datos del usuario.Si el usuario no existe, muestra un mensaje en la consola.
+// useEffect: Se ejecuta al cargar el componente para obtener los datos del usuario por su ID. 
+
+// Este componente proporciona una forma sencilla de editar la información de un usuario almacenado en Firestore, asegurando que los datos se actualicen correctamente y notificando al usuario sobre el éxito o el fallo de la operación.
+

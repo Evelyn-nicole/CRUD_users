@@ -6,6 +6,9 @@ import Edit from "./Components/Edit";
 import Home from "./Components/Home";
 import Login from "./Components/Login";
 import CreateUser from "./Components/CreateUser";
+import ViewTrainings from './Components/ViewTrainings';
+import Training from "./Components/Trainig";
+import CreateTraining from "./Components/CreateTraining";
 import { getAuth, signOut } from "firebase/auth";
 import { app } from "./FireBaseConfig/FireBase";
 import Swal from "sweetalert2";
@@ -19,6 +22,7 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [getUser, setGetUser] = useState("");
 
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setUser(user);
@@ -26,6 +30,9 @@ const App = () => {
     return () => unsubscribe();
   }, []);
 
+
+
+// useEffect se usa para establecer un observador en el estado de autenticación de Firebase y actualizar el estado de user cuando cambia.
   useEffect(() => {
     if (user) {
       const fetchUserName = async () => {
@@ -39,6 +46,8 @@ const App = () => {
     }
   }, [user]);
 
+
+  // userSignOut para manejar el cierre de sesión del usuario.
   const userSignOut = () => {
     Swal.fire({
       icon: "success",
@@ -47,7 +56,7 @@ const App = () => {
       timer: 2000,
     }).then(() => {
       signOut(auth).then(() => {
-        window.location.href = "/"; // Redirige al usuario a la página de inicio
+        window.location.href = "/"; // Redirige al usuario a home
       });
     });
   };
@@ -91,6 +100,11 @@ const App = () => {
                       <Link className="text-white"  to={"/users"}>Usuarios</Link>
                     </li>
                   ) : null}
+                  {user !== null && getUser.role === "user" ? (
+                    <li className="nav-item m-2 mt-3">
+                      <Link className="text-white"  to={`/training/${user.uid}`}>Mi sesión</Link>
+                    </li>
+                  ) : null}
                   {user ? (
                     <li className="nav-item m-1">
                       <div className="rounded-pill text-white bg-dark p-2">
@@ -114,6 +128,9 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/users" element={<Users />} />
             <Route path="/create" element={<CreateUser />} />
+            <Route path="/training/:id" element={<Training />} />
+            <Route path="/create-training/:id" element={<CreateTraining />} />
+            <Route path="/view-trainings/:id" element={<ViewTrainings />} />
             <Route path="/edit/:id" element={<Edit />} />
           </Routes>
         </div>

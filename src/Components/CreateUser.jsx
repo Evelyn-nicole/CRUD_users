@@ -21,6 +21,7 @@ import { switchMap, tap, catchError } from 'rxjs/operators'; // Importa operador
 import Swal from 'sweetalert2'; // SweetAlert para alertas
 
 
+
 // Define el componente CreateUser
 // Estados para los campos del formulario y otras variables necesarias
 const CreateUser = () => {
@@ -37,41 +38,49 @@ const CreateUser = () => {
   const [updated_at, setUpdated] = useState("");
   
   
+
   // Obtención de hooks y referencias a Firebase
-  // Hook para la navegación en React Router
-  // Instancia de Firestore
-  // Instancia de Firebase Auth
   const navigate = useNavigate(); 
-  const fireStore = getFirestore(app); 
-  const auth = getAuth(app); 
+  const fireStore = getFirestore(app);  // instancia de Firestore para realizar operaciones en DB.
+  const auth = getAuth(app); //instancia de Firebase Auth para manejar  autenticación de usuarios.
 
 
-  // Función para manejar el envío del formulario
+
+  // Esta función se ejecuta cuando se envía el formulario la llamada a event.preventDefault() evita que se envie el formulario por defecto..
+  // Evita que la página se recargue.
   const createUser = (event) => {
-    event.preventDefault(); // Previene el comportamiento por defecto del formulario
+    event.preventDefault(); 
 
 
-    // Función para crear un usuario en Firebase Authentication y guardar datos adicionales en Firestore
+  
+    // createFBUser se encarga de crear un usuario en Firebase Authentication y de almacenar datos adicionales 
+    // del usuario. Luego, se utiliza dentro de createUser para el proceso de creación de un nuevo usuario.
     const createFBUser = (
       email,
       password,
       userName,
       lastName,
       address,
-      role, // todos los usuarios creados son usuarios por defecto
+      role, // todos son creados con user por defecto.
       dni,
       country,
       phone,
       created_at,
     ) => {
 
-      // Crea el usuario en Firebase Authentication
+      // createUserWithEmailAndPassword de Firebase Auth para crear nuevo usuario.
+      // from se usa para convertir la promesa retornada en un observable.
       return from(createUserWithEmailAndPassword(auth, email, password)).pipe(
+        // switchMap toma el resultado de createUserWithEmailAndPassword, 
+        // Define referencias a documentos en Firestore (newUser y newUserTraining).
         switchMap((fireBaseUser) => {
           const infoUser = fireBaseUser;
-          // Crea un documento de usuario en Firestore con datos adicionales
           const newUser = doc(fireStore, `users/${infoUser.user.uid}`);
+          const newUserTraining = doc(fireStore, `training/${infoUser.user.uid}`);
           
+
+          // setDoc crea usuario en Firestore con los datos adicionales.
+          // from convierte la promesa retornada por setDoc en un observable.
           return from(setDoc(newUser, {
             userName: userName,
             lastName: lastName,
@@ -82,11 +91,11 @@ const CreateUser = () => {
             dni: dni,
             country: country,
             phone: phone,
-            created_at: new Date(), // Establece la fecha y hora actual al crear un usuario
+            created_at: new Date(), 
             updated_at: updated_at,
           }))
         }),
-        tap(() => {
+        tap(() => { // Tap: para realizar efectos secundarios sin modificar el flujo de datos.
           // Limpiar el formulario después de agregar
           setNameUser('');
           setLastName('');
@@ -99,8 +108,8 @@ const CreateUser = () => {
           setCreated('');
           setUpdated('');
 
-          // Una vez crea el usuario redirige a vista home
-          navigate(`/home}`);
+          // Una vez crea el usuario redirige a vista training (mi perfil)     
+          navigate(`/training/${auth.currentUser.uid}`);
 
 
           // Alerta de creacion de usuario exitoso
@@ -111,8 +120,7 @@ const CreateUser = () => {
             timer: 1500
           });
         }),
-        catchError((error) => {
-          // Manejo de errores
+        catchError((error) => {  // Maneja cualquier error que ocurra en el proceso de creación de usuario.
           Swal.fire({
             icon: "error",
             title: "Error al crear el usuario",
@@ -141,6 +149,8 @@ const CreateUser = () => {
   
   
   // Renderizado del formulario
+  // evento onsubmit: se activa cuando un usuario envía un formulario HTML asociado al elemento <form>
+  // 
   return (
     <>
       <div>
@@ -157,8 +167,8 @@ const CreateUser = () => {
             aria-label="Sizing example input"
             data-testid="userName-input"
             aria-describedby="inputGroup-sizing-default"
-            value={userName}
-            onChange={(e) => setNameUser(e.target.value)}
+            value={userName} // Enlaza el valor del campo al estado userName
+            onChange={(e) => setNameUser(e.target.value)} // Actualiza el estado userName
           />
         </div>
         <div className="input-group mb-3">
@@ -258,11 +268,11 @@ const CreateUser = () => {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
           />
-        </div>
+        </div> 
         <div className="d-grid gap-2 col-6 mx-auto">
           <button type="submit" className="btn btn-primary">
             Agregar Usuario
-          </button>
+          </button> 
         </div>
       </form>
     </>
@@ -270,3 +280,12 @@ const CreateUser = () => {
 };
 
 export default CreateUser;
+
+// Resumen
+// El formulario para crear un usuario en React:
+
+// Interfaz de Usuario: Utiliza componentes de Bootstrap para un diseño consistente y atractivo.
+// Gestión del Estado: Cada campo del formulario está vinculado a un estado mediante useState.
+// Manejo de Eventos: El evento onChange de cada campo actualiza el estado correspondiente. El evento onSubmit del formulario activa la función createUser.
+// Creación de Usuario: La función createUser se encarga de la validación y la creación del usuario en Firebase Authentication y Firestore.
+//Esto asegura que el formulario no solo capture la información del usuario de manera efectiva, sino que también la procese y la almacene correctamente en los servicios backend.

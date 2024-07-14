@@ -7,11 +7,13 @@ import Swal from "sweetalert2";
 
 
 // Configuracion de hooks
+// useState para almacenar y gestionar el estado de la lista de usuarios.
 const Users = () => {
   const [users, setUsers] = useState([]);
 
 
   // usersCollection para acceder a la colección de usuarios en Firestore.
+  // usersCollections como una referencia a la colección de usuarios en Firestore mediante collection(db, "users").
   const usersCollections = collection(db, "users");
 
 
@@ -19,7 +21,7 @@ const Users = () => {
   // getDocs: Obtiene todos los documentos de la colección de usuarios.
   const getUsersCollection = async () => {
     const data = await getDocs(usersCollections);
-    setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))); // Actualiza el estado de users
   };
   
 
@@ -29,7 +31,7 @@ const Users = () => {
   const deleteUser = async (id) => {
     const userDeleteDoc = doc(db, "users", id);
     await deleteDoc(userDeleteDoc);
-    getUsersCollection(); 
+    getUsersCollection();  // para actualizar la lista de usuarios mostrada.
   };
 
 
@@ -121,3 +123,11 @@ const Users = () => {
 };
 
 export default Users;
+
+// Muestra una lista de usuarios almacenados en Firestore.
+// Utiliza useState y useEffect para gestionar el estado de los usuarios y cargar la lista al inicio.
+// Ofrece la funcionalidad de eliminar usuarios con una confirmación mediante SweetAlert2.
+// Proporciona enlaces para editar usuarios individuales (Editar) y botones para eliminar usuarios (Eliminar).
+
+
+

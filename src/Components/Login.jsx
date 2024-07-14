@@ -1,11 +1,11 @@
 // Importa los módulos necesarios de react, firebase y rxjs
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"; 
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // para la navegación entre rutas.
 import { app } from "../FireBaseConfig/FireBase"; 
-import { doc, getDoc, getFirestore } from "firebase/firestore";
-import { from, of } from 'rxjs'; 
-import { switchMap, catchError, tap } from 'rxjs/operators'; 
+import { doc, getDoc, getFirestore } from "firebase/firestore"; // para interactuar con la base de datos.
+import { from, of } from 'rxjs';  // para manejar flujos asíncronos de datos.
+import { switchMap, catchError, tap } from 'rxjs/operators';  // para manejar flujos asíncronos de datos.
 import Swal from "sweetalert2"; 
 
 
@@ -32,22 +32,20 @@ const Login = () => {
     // from(signInWithEmailAndPassword(auth, email, password)): Inicia sesión con Firebase Auth y convierte la promesa en un observable.
     // switchMap: Después de iniciar sesión, obtiene el ID del usuario actual y busca el documento en Firestore.
     from(signInWithEmailAndPassword(auth, email, password)).pipe(
-      switchMap(() => {
-        // Obtiene el ID de usuario actual
-        const userId = auth.currentUser.uid;
+      switchMap(() => { 
+        const userId = auth.currentUser.uid; // Obtiene el ID de usuario actual
         const docRef = doc(firestore, `users/${userId}`);
-        return from(getDoc(docRef)).pipe(
+        return from(getDoc(docRef)).pipe(  // Convierte la promesa de getDoc (que obtiene el documento de usuario) en un observable.
           tap((docSnap) => {
-            if (docSnap.exists()) {
-              // Si el usuario existe, obtiene su información
-              const userDoc = docSnap.data();
-              const role = userDoc.role;
+            if (docSnap.exists()) {  // Verifica si el documento de usuario existe en Firestore.
+              const userDoc = docSnap.data();  // Obtiene los datos del documento de usuario.
+              const role = userDoc.role;  // Obtiene el rol del usuario
 
 
               // Redirige según el rol del usuario
               role === "admin"
                 ? navigate("/users")
-                : navigate(`/home`);
+                : navigate("/home");
 
 
               // Muestra una alerta de inicio de sesión exitoso
@@ -86,7 +84,7 @@ const Login = () => {
         });
         return of(null);
       })
-    ).subscribe();
+    ).subscribe(); // Suscribe al observable para que todas las operaciones encadenadas se ejecuten.
   };
 
 
@@ -134,3 +132,7 @@ const Login = () => {
 };
 
 export default Login;
+
+// Gestiona el inicio de sesión de usuarios utilizando Firebase Authentication y Firestore. Utiliza RxJS para manejar operaciones asincrónicas y SweetAlert2 para alertas.
+// submithandlerManeja el envío del formulario de inicio de sesión.Usa RxJS para iniciar sesión con Firebase Auth y obtener el documento de usuario de Firestore.
+// Redirige al usuario según su rol (admin o user)
