@@ -1,0 +1,169 @@
+
+
+
+
+
+
+  /* Styles LOGIN */
+.login-page .login-background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('./assets/login.jpg') no-repeat center center/cover;
+    backdrop-filter: blur(8px) !important; 
+  }
+  
+  /* Card styles */
+  .login-page .login-style {
+    background: rgba(0, 0, 0, 0.687);
+    border: none;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Card header styles */
+  .login-page .card-header {
+    background: none;
+    border: none;
+  }
+  
+  .login-page .card-header h2 {
+    font-size: 2rem;
+    margin: 0;
+  }
+  
+  /* Form styles */
+  .login-page form {
+    margin: 20px 0;
+  }
+  
+  .login-page .form-label {
+    font-weight: bold;
+  }
+  
+  .login-page .form-control {
+    border-radius: 30px;
+    padding: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+  
+  .login-page .form-control:focus {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: none;
+  }
+  
+  .login-page .btn-primary {
+    background-color: #ffffff;
+    color: #000;
+    border-radius: 30px;
+    padding: 10px;
+    border: none;
+  }
+  
+  .login-page .btn-primary:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .login-page .form-check-input {
+    margin-top: 0.3rem;
+  }
+  
+  .login-page .text-white {
+    color: white;
+  }
+  
+  /* Link styles */
+  .login-page a {
+    text-decoration: none;
+  }
+  
+  .login-page a:hover {
+    text-decoration: underline;
+  }
+  
+
+/**********************************************************************/
+
+
+/* styles.css CREATEUSER*/
+.create-user-bg {
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url('./assets/login20.png') no-repeat center center/cover;
+}
+
+.create-user-form {
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo transparente */
+  padding: 2rem;
+  border: px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/**********************************************************************/
+
+
+/* styles.css TRAINING USERS*/
+.training-background {
+  background-image: url('./assets/trainingUsers.webp'); /* Ruta a tu imagen de fondo */
+  background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
+  background-position: center; /* Centra la imagen */
+  min-height: 100vh; /* Altura mínima para cubrir toda la pantalla */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.training-card {
+  background-color: rgba(255, 255, 255, 0.689); /* Fondo transparente con color de fondo */
+  background-position: center; /* Centra la imagen */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.427);
+  color: #090909; /* Color de texto */
+  max-width: 600px; /* Ancho máximo para la tarjeta */
+  margin: 0 auto; /* Centra la tarjeta en la pantalla */
+  border: 1px solid #ccc; /* Borde de la tarjeta */
+}
+
+.training-card .card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.training-card .card-text {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.training-card .btn {
+  margin-top: 10px;
+}
+
+.card-img-perfil {
+  width: auto; /* Ajusta el tamaño de la imagen al ancho de la tarjeta */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+
+/**********************************************************************/
+
+
+
+
+

@@ -9,11 +9,13 @@ import CreateUser from "./Components/CreateUser";
 import ViewTrainings from './Components/ViewTrainings';
 import Training from "./Components/Trainig";
 import CreateTraining from "./Components/CreateTraining";
+import EditTraining from "./Components/EditTraining";
 import { getAuth, signOut } from "firebase/auth";
 import { app } from "./FireBaseConfig/FireBase";
 import Swal from "sweetalert2";
 import { useState, useEffect } from "react";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
+import './styles.css';
 
 
 const firestore = getFirestore(app);
@@ -131,6 +133,7 @@ const App = () => {
             <Route path="/training/:id" element={<Training />} />
             <Route path="/create-training/:id" element={<CreateTraining />} />
             <Route path="/view-trainings/:id" element={<ViewTrainings />} />
+            <Route path="/edit-training/:trainingId" element={<EditTraining />} />
             <Route path="/edit/:id" element={<Edit />} />
           </Routes>
         </div>

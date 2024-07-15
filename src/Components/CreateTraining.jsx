@@ -76,7 +76,7 @@ const CreateTraining = () => {
 
     }
   };
-  
+
 
   return (
     <div className="container mt-5">

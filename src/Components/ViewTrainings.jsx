@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs, query, where } from 'firebase/firestore';
-import { db } from '../FireBaseConfig/FireBase'; 
-import { useParams } from 'react-router-dom';
+import { collection, getDocs, query, where, doc, deleteDoc } from 'firebase/firestore';
+import { db } from '../FireBaseConfig/FireBase';
+import { useParams, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const ViewTrainings = () => {
   const { id } = useParams(); // Asegúrate de que el userId esté en los parámetros de la URL
   const [userTraining, setUserTraining] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserTrainings = async () => {
@@ -19,6 +21,31 @@ const ViewTrainings = () => {
     fetchUserTrainings();
   }, [id]);
 
+  const handleDelete = async (trainingId) => {
+    Swal.fire({
+      title: '¿Desea eliminar la capacitación?',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const trainingDoc = doc(db, 'training', trainingId);
+        await deleteDoc(trainingDoc);
+        setUserTraining(userTraining.filter(training => training.id !== trainingId));
+        Swal.fire({
+          icon: 'success',
+          title: '¡Capacitación eliminada con éxito!',
+          showConfirmButton: false,
+          timer: 2000
+        });
+      }
+    });
+  };
+
+  const handleEdit = (trainingId) => {
+    navigate(`/edit-training/${trainingId}`);
+  };
+
   return (
     <div className="container mt-5">
       <h3>Capacitaciones</h3>
@@ -29,6 +56,7 @@ const ViewTrainings = () => {
             <th>Descripción</th>
             <th>Fecha de Inicio</th>
             <th>Fecha de Fin</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -38,6 +66,10 @@ const ViewTrainings = () => {
               <td>{training.description}</td>
               <td>{training.startDate}</td>
               <td>{training.endDate}</td>
+              <td>
+                <button className="btn btn-primary" onClick={() => handleEdit(training.id)}>Editar</button>
+                <button className="btn btn-danger" onClick={() => handleDelete(training.id)}>Eliminar</button>
+              </td>
             </tr>
           ))}
         </tbody>
