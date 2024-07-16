@@ -38,28 +38,33 @@ const Training = () => {
 
   return (
     <div className="training-background">
-      <div className="card text-center training-card">
-        <img src={imagePerfil} alt="Perfil" className="card-img-perfil" />
-        <div className="card-body">
-          <h5 className="card-title">
-            {capitalizeFirstLetter(user.userName)}{" "}
-            {capitalizeFirstLetter(user.lastName)}
-          </h5>
-          <p className="card-text">Email: {user.email}</p>
-          <p className="card-text">
-            Address: {capitalizeFirstLetter(user.address)}
-          </p>
-          <p className="card-text">DNI: {user.dni}</p>
-          <p className="card-text">
-            Country: {capitalizeFirstLetter(user.country)}
-          </p>
-          <p className="card-text">Phone: {user.phone}</p>
-          <Link to={`/create-training/${userId}`} className="btn btn-primary">
-            Crear Capacitaciones
-          </Link>
-          <Link to={`/view-trainings/${userId}`} className="btn btn-secondary">
-            Ver Capacitaciones
-          </Link>
+      <div  className="training-content">
+        <div className="card text-center training-card">
+          <img src={imagePerfil} alt="Perfil" className="card-img-perfil" />
+          <div className="card-body">
+            <h5 className="card-title">
+              {capitalizeFirstLetter(user.userName)}{" "}
+              {capitalizeFirstLetter(user.lastName)}
+            </h5>
+            <p className="card-text">Email: {user.email}</p>
+            <p className="card-text">
+              Address: {capitalizeFirstLetter(user.address)}
+            </p>
+            <p className="card-text">DNI: {user.dni}</p>
+            <p className="card-text">
+              Country: {capitalizeFirstLetter(user.country)}
+            </p>
+            <p className="card-text">Phone: {user.phone}</p>
+            <Link to={`/create-training/${userId}`} className="btn btn-primary">
+              Crear Capacitación
+            </Link>
+            <Link
+              to={`/view-trainings/${userId}`}
+              className="btn btn-secondary ms-2"
+            >
+              Mis Capacitaciones
+            </Link>
+          </div>
         </div>
       </div>
     </div>

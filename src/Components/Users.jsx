@@ -70,7 +70,7 @@ const Users = () => {
     <>
       <div className="container mt-5">
         <div className="row">
-          <div className="col">
+          <div className="col-12">
             <div className="d-grid gap-2"></div>
             <table className="table table-dark table-striped">
               <thead>

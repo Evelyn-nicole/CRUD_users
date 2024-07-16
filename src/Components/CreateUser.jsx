@@ -6,7 +6,7 @@ import React, { useState } from "react";
 // getFirestore: Método para obtener una instancia de Firestore.
 import { setDoc, doc, getFirestore } from "firebase/firestore";
 import { app } from "../FireBaseConfig/FireBase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 // Método para crear un nuevo usuario utilizando un email y una contraseña.
 // Método para obtener una instancia de autenticación de Firebase.
@@ -149,13 +149,13 @@ const CreateUser = () => {
   return (
     <>
       <div className="create-user-bg">
-        <div className="text-center text-white p-3">
+        <div className="title-create-user text-center text-white p-3 mt-3">
           <h1>Registro Nuevo Usuario</h1>
         </div>
         <div >
           <form
             onSubmit={createUser}
-            className="container mt-3 create-user-form col-sm-12 col-md-10 col-lg-8 col-xl-6"
+            className="container mt-4 create-user-form col-sm-12 col-md-10 col-lg-8 col-xl-6"
           >
             <div className="input-group mb-3">
               <span className="input-group-text" id="inputGroup-sizing-default">
@@ -269,10 +269,13 @@ const CreateUser = () => {
                 onChange={(e) => setPhone(e.target.value)}
               />
             </div>
-            <div className="d-grid gap-2 col-3 mx-auto">
+            <div className="">
               <button type="submit" className="btn btn-primary">
                 Crear Usuario
               </button>
+              <Link className="btn btn-danger ms-2" to={`/login`}>
+              Volver
+              </Link>
             </div>
           </form>
         </div>

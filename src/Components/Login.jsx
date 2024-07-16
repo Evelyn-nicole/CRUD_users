@@ -1,4 +1,3 @@
-// Importa los módulos necesarios de react, firebase y rxjs
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom"; // para la navegación entre rutas.
@@ -40,7 +39,11 @@ const Login = () => {
                 const role = userDoc.role; // Obtiene el rol del usuario
 
                 // Redirige según el rol del usuario
-                role === "admin" ? navigate("/users") : navigate("/home");
+                if (role === "admin") {
+                  navigate("/users");
+                } else {
+                  navigate(`/training/${userId}`);
+                }
 
                 // Muestra una alerta de inicio de sesión exitoso
                 Swal.fire({
@@ -85,21 +88,21 @@ const Login = () => {
   // Renderiza el formulario de inicio de sesión
   return (
     <>
+      <div className="title-login text-white mt-5 mb-3">
+        <h1>INICIO DE SESION</h1>
+      </div>
       <div className="login-page">
-        <div className="login-background">
+        <div className="login-background mt-5">
           <div className="container">
             <div className="row justify-content-center">
               <div className="col-sm-12 col-md-10 col-lg-8 col-xl-6">
                 <div className="card login-style">
-                  <div className="card-header text-center">
-                    <h2 className="text-white">Inicio de Sesión</h2>
-                  </div>
                   <div className="card-body">
                     <form onSubmit={submithandler} className="mx-4 px-4">
-                      <div className="mb-3">
+                      <div className="mb-5">
                         <label
                           htmlFor="email"
-                          className="form-label text-white"
+                          className="form-label text-black"
                         >
                           Ingresa tu Email
                         </label>
@@ -114,7 +117,7 @@ const Login = () => {
                       <div className="mb-3">
                         <label
                           htmlFor="password"
-                          className="form-label text-white"
+                          className="form-label text-black"
                         >
                           Ingresa tu Clave
                         </label>
@@ -132,7 +135,7 @@ const Login = () => {
                           id="rememberMe"
                         />
                         <label
-                          className="form-check-label text-white"
+                          className="form-check-label text-black"
                           htmlFor="rememberMe"
                         >
                           Remember me
@@ -148,8 +151,8 @@ const Login = () => {
                       </a>
                     </div> */}
                     <div className="text-center mt-3">
-                      <Link className="text-white" to={"/Create"}>
-                       ¿No tienes una cuenta? Registrate
+                      <Link className="text-black" to={"/Create"}>
+                        ¿No tienes una cuenta? Registrate
                       </Link>
                     </div>
                   </div>
