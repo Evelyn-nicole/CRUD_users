@@ -171,7 +171,7 @@ const App = () => {
 };
 
 export default App;
-// El unSuscribe se asegura de que el estado de autenticación del usuario esté siempre actualizado en tu aplicación. 
-// Cada vez que el usuario inicia o cierra sesión, el estado user en tu componente se actualiza en consecuencia. 
-// La función de limpieza (unsubscribe) se asegura de que se elimine el observador cuando el componente se desmonta, lo que ayuda a 
-// mantener la aplicación eficiente y libre de fugas de memoria.
+// El unSuscribe se asegura de que el estado de autenticación del usuario esté siempre actualizado.
+    // Cada vez que se inicia o cierra sesión, el estado user en el componente se actualiza en consecuencia. 
+    // La función de limpieza (unsubscribe) se asegura de que se elimine el observador cuando el componente se desmonta, esto para 
+    // mantener la aplicación eficiente y libre de fugas de memoria.  
