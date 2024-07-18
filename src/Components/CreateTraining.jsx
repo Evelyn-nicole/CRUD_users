@@ -72,6 +72,7 @@ const CreateTraining = () => {
     }
   };
 
+  // Renderizado del componente 
   return (
     <div className="training-background-img">
       <div className="container mt-5">

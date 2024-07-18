@@ -19,12 +19,20 @@ import { doc, getDoc, getFirestore } from "firebase/firestore";
 import "./styles.css";
 import logo from './assets/logoCental.png'
 
+
+// Inicializa Firestore con la configuración de Firebase (app). lo asigna a la variable firestore.
+// Inicializa la autenticación de Firebase con la configuración de Firebase (app). Lo asigna a la variable auth.
 const firestore = getFirestore(app);
 const auth = getAuth(app);
+
+
 const App = () => {
   const [user, setUser] = useState(null);
   const [getUser, setGetUser] = useState("");
 
+
+  // Hook de efecto que se ejecuta cuando el componente se monta. 
+  // Se suscribe a los cambios de autenticación y actualiza el estado user cuando cambia el estado de autenticación
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setUser(user);
@@ -32,19 +40,24 @@ const App = () => {
     return () => unsubscribe();
   }, []);
 
-  // useEffect se usa para establecer un observador en el estado de autenticación de Firebase y actualizar el estado de user cuando cambia.
+
+
+  // Funcion de cierre de sesion. 
+  // useEffect sHook de efecto que se ejecuta cuando el estado user cambia.
   useEffect(() => {
-    if (user) {
+    if (user) {                                               // Si hay un usuario autenticado ejecuta la función fetchUserName
       const fetchUserName = async () => {
         const docRef = doc(firestore, `users/${user.uid}`);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
+        const docSnap = await getDoc(docRef);                // Obtiene el documento del usuario desde Firestore.
+        if (docSnap.exists()) {                              // Si el documento del usuario existe, actualiza el estado getUser con los datos del documento.
           setGetUser(docSnap.data());
         }
       };
       fetchUserName();
     }
   }, [user]);
+
+
 
   // userSignOut para manejar el cierre de sesión del usuario.
   const userSignOut = () => {
@@ -55,7 +68,7 @@ const App = () => {
       timer: 2000,
     }).then(() => {
       signOut(auth).then(() => {
-        window.location.href = "/"; // Redirige al usuario a home
+        window.location.href = "/"; 
       });
     });
   };
@@ -158,3 +171,7 @@ const App = () => {
 };
 
 export default App;
+// El unSuscribe se asegura de que el estado de autenticación del usuario esté siempre actualizado en tu aplicación. 
+// Cada vez que el usuario inicia o cierra sesión, el estado user en tu componente se actualiza en consecuencia. 
+// La función de limpieza (unsubscribe) se asegura de que se elimine el observador cuando el componente se desmonta, lo que ayuda a 
+// mantener la aplicación eficiente y libre de fugas de memoria.

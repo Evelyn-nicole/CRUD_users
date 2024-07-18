@@ -1,88 +1,68 @@
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import React from "react";
-import { Link, useNavigate } from "react-router-dom"; // para la navegación entre rutas.
-import { app } from "../FireBaseConfig/FireBase";
-import { doc, getDoc, getFirestore } from "firebase/firestore"; // para interactuar con la base de datos.
-import { from, of } from "rxjs"; // para manejar flujos asíncronos de datos.
-import { switchMap, catchError, tap } from "rxjs/operators"; // para manejar flujos asíncronos de datos.
+import React from "react"; 
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"; // Importa funciones de autenticación de Firebase.
+import { Link, useNavigate } from "react-router-dom"; // Importa hooks y componentes de navegación de react-router-dom.
+import { app } from "../FireBaseConfig/FireBase"; // Importa la configuración de Firebase.
+import { doc, getDoc, getFirestore } from "firebase/firestore"; // Importa funciones de Firestore.
 import Swal from "sweetalert2";
+
 
 // Iniciliza las Instancias de Firestore y Auth
 const firestore = getFirestore(app);
 const auth = getAuth(app);
 
+
+// Define el componente Login.
 const Login = () => {
-  const navigate = useNavigate(); // Permite redirigir al usuario a diferentes rutas.
+  const navigate = useNavigate(); // Hook para redireccionar a diferentes rutas.
 
-  // Función para manejar el envío del formulario de inicio de sesión
-  const submithandler = (e) => {
-    e.preventDefault(); // Evita que el formulario se envíe
 
-    // Obtiene el correo electrónico y la contraseña del formulario
+   // Función para manejar el envío del formulario de inicio de sesión.
+  const submithandler = async (e) => {
+    e.preventDefault(); // Previene la recarga de la página al enviar el formulario.
+
+    
+    // Obtiene el email y la contraseña de los elementos del formulario.
     const email = e.target.elements.email.value;
     const password = e.target.elements.password.value;
 
-    // Utiliza RxJS para manejar el inicio de sesión y la obtención del documento de usuario
-    // from(signInWithEmailAndPassword(auth, email, password)): Inicia sesión con Firebase Auth y convierte la promesa en un observable.
-    // switchMap: Después de iniciar sesión, obtiene el ID del usuario actual y busca el documento en Firestore.
-    from(signInWithEmailAndPassword(auth, email, password))
-      .pipe(
-        switchMap(() => {
-          const userId = auth.currentUser.uid; // Obtiene el ID de usuario actual
-          const docRef = doc(firestore, `users/${userId}`);
-          return from(getDoc(docRef)).pipe(
-            // Convierte la promesa de getDoc (que obtiene el documento de usuario) en un observable.
-            tap((docSnap) => {
-              if (docSnap.exists()) {
-                // Verifica si el documento de usuario existe en Firestore.
-                const userDoc = docSnap.data(); // Obtiene los datos del documento de usuario.
-                const role = userDoc.role; // Obtiene el rol del usuario
 
-                // Redirige según el rol del usuario
-                if (role === "admin") {
-                  navigate("/users");
-                } else {
-                  navigate(`/training/${userId}`);
-                }
+    // Inicia sesión con Firebase Authentication.
+    try {
+      await signInWithEmailAndPassword(auth, email, password); // Obtiene el UID del usuario autenticado.
+      const userId = auth.currentUser.uid;  // Referencia al documento del usuario en Firestore.
+      const docRef = doc(firestore, `users/${userId}`); // Obtiene el documento del usuario.
+      const docSnap = await getDoc(docRef);
 
-                // Muestra una alerta de inicio de sesión exitoso
-                Swal.fire({
-                  icon: "success",
-                  title: `¡Bienvenido, ${userDoc.userName}! Redirigiendo a tu sesión`,
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-              } else {
-                // Si el usuario no existe, muestra un mensaje de error
-                Swal.fire({
-                  icon: "error",
-                  title: "Usuario no encontrado",
-                  text: "Por favor, verifique sus credenciales",
-                });
-              }
-            }),
-            catchError((error) => {
-              // Maneja errores al obtener el documento de usuario
-              Swal.fire({
-                icon: "error",
-                title: "Error al obtener los datos del usuario",
-                text: error.message,
-              });
-              return of(null);
-            })
-          );
-        }),
-        catchError((error) => {
-          // Maneja errores de inicio de sesión
-          Swal.fire({
-            icon: "error",
-            title: "Error al iniciar sesión",
-            text: error.message,
-          });
-          return of(null);
-        })
-      )
-      .subscribe(); // Suscribe al observable para que todas las operaciones encadenadas se ejecuten.
+      if (docSnap.exists()) {
+        const userDoc = docSnap.data(); // Obtiene los datos del documento.
+        const role = userDoc.role; // Obtiene el rol del usuario.
+
+        if (role === "admin") {
+          navigate("/users");
+        } else {
+          navigate(`/training/${userId}`);
+        }
+
+        Swal.fire({
+          icon: "success",
+          title: `¡Bienvenido, ${userDoc.userName}! Redirigiendo a tu sesión`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Usuario no encontrado",
+          text: "Por favor, verifique sus credenciales",
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error al iniciar sesión",
+        text: error.message,
+      });
+    }
   };
 
   // Renderiza el formulario de inicio de sesión

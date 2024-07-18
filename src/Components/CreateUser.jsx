@@ -1,27 +1,13 @@
-// Importa los módulos necesarios de React, Firebase y RxJS
 import React, { useState } from "react";
-
-// setDoc: Método para crear o sobrescribir un documento en una colección de Firestore.
-// doc: Método para obtener una referencia a un documento en una colección.
-// getFirestore: Método para obtener una instancia de Firestore.
-import { setDoc, doc, getFirestore } from "firebase/firestore";
+import { setDoc, doc, getFirestore } from "firebase/firestore"; // Importa funciones de Firestore.
 import { app } from "../FireBaseConfig/FireBase";
 import { useNavigate, Link } from "react-router-dom";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import Swal from "sweetalert2";
 
-// Método para crear un nuevo usuario utilizando un email y una contraseña.
-// Método para obtener una instancia de autenticación de Firebase.
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth"; // Importa funciones de autenticación de Firebase.
 
-// from: Método para crear un observable a partir de una promesa.
-// switchMap: Operador para cambiar a un nuevo observable basado en el valor de un observable anterior.
-// tap: Operador para ejecutar efectos secundarios (side effects).
-// catchError: Operador para manejar errores en un observable.
-import { from } from "rxjs";
-import { switchMap, tap, catchError } from "rxjs/operators"; // Importa operadores de RxJS
-import Swal from "sweetalert2"; // SweetAlert para alertas
-
-// Define el componente CreateUser
-// Estados para los campos del formulario y otras variables necesarias
+// // Define el componente CreateUser
+// // Estados para los campos del formulario y otras variables
 const CreateUser = () => {
   const [userName, setNameUser] = useState("");
   const [lastName, setLastName] = useState("");
@@ -35,114 +21,77 @@ const CreateUser = () => {
   const [created_at, setCreated] = useState("");
   const [updated_at, setUpdated] = useState("");
 
+
   // Obtención de hooks y referencias a Firebase
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Hook para redireccionar a diferentes rutas.
   const fireStore = getFirestore(app); // instancia de Firestore para realizar operaciones en DB.
   const auth = getAuth(app); //instancia de Firebase Auth para manejar  autenticación de usuarios.
 
-  // Esta función se ejecuta cuando se envía el formulario la llamada a event.preventDefault() evita que se envie el formulario por defecto..
-  // Evita que la página se recargue.
-  const createUser = (event) => {
-    event.preventDefault();
 
-    // createFBUser se encarga de crear un usuario en Firebase Authentication y de almacenar datos adicionales
-    // del usuario. Luego, se utiliza dentro de createUser para el proceso de creación de un nuevo usuario.
-    const createFBUser = (
-      email,
-      password,
-      userName,
-      lastName,
-      address,
-      role, // todos son creados con user por defecto.
-      dni,
-      country,
-      phone,
-      created_at
-    ) => {
-      // createUserWithEmailAndPassword de Firebase Auth para crear nuevo usuario.
-      // from se usa para convertir la promesa retornada en un observable.
-      return from(createUserWithEmailAndPassword(auth, email, password))
-        .pipe(
-          // switchMap toma el resultado de createUserWithEmailAndPassword,
-          // Define referencias a documentos en Firestore (newUser y newUserTraining).
-          switchMap((fireBaseUser) => {
-            const infoUser = fireBaseUser;
-            const newUser = doc(fireStore, `users/${infoUser.user.uid}`);
-            const newUserTraining = doc(
-              fireStore,
-              `training/${infoUser.user.uid}`
-            );
+  // Función para crear un nuevo usuario.
+  const createUser = async (event) => {
+    event.preventDefault(); // Previene la recarga de la página al enviar el formulario.
 
-            // setDoc crea usuario en Firestore con los datos adicionales.
-            // from convierte la promesa retornada por setDoc en un observable.
-            return from(
-              setDoc(newUser, {
-                userName: userName,
-                lastName: lastName,
-                address: address,
-                email: email,
-                password: password,
-                role: "user",
-                dni: dni,
-                country: country,
-                phone: phone,
-                created_at: new Date(),
-                updated_at: updated_at,
-              })
-            );
-          }),
-          tap(() => {
-            // Tap: para realizar efectos secundarios sin modificar el flujo de datos.
-            // Limpiar el formulario después de agregar
-            setNameUser("");
-            setLastName("");
-            setAddress("");
-            setEmail("");
-            setRole("");
-            setDni("");
-            setCountry("");
-            setPhone("");
-            setCreated("");
-            setUpdated("");
 
-            // Una vez crea el usuario redirige a vista training (mi perfil)
-            navigate(`/training/${auth.currentUser.uid}`);
 
-            // Alerta de creacion de usuario exitoso
-            Swal.fire({
-              icon: "success",
-              title: "Usuario creado exitosamente",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          }),
-          catchError((error) => {
-            // Maneja cualquier error que ocurra en el proceso de creación de usuario.
-            Swal.fire({
-              icon: "error",
-              title: "Error al crear el usuario",
-              text: error.message,
-            });
-            throw error;
-          })
-        )
-        .subscribe();
-    };
+    try {
+      // Crea un nuevo usuario en Firebase Authentication.
+      const fireBaseUser = await createUserWithEmailAndPassword(auth, email, password);
+      const infoUser = fireBaseUser;
 
-    // Llama a la función para crear el usuario en Firebase y Firestore
-    createFBUser(
-      email,
-      password,
-      userName,
-      lastName,
-      address,
-      role,
-      dni,
-      country,
-      phone,
-      created_at
-    );
+
+      // Define referencias a documentos en Firestore.
+      const newUser = doc(fireStore, `users/${infoUser.user.uid}`);
+
+
+      // Crea un nuevo documento en Firestore con los datos del usuario.
+      await setDoc(newUser, {
+        userName: userName,
+        lastName: lastName,
+        address: address,
+        email: email,
+        password: password,
+        role: "user",
+        dni: dni,
+        country: country,
+        phone: phone,
+        created_at: new Date(),
+        updated_at: updated_at,
+      });
+
+
+       // Limpia los campos del formulario.
+      setNameUser("");
+      setLastName("");
+      setAddress("");
+      setEmail("");
+      setRole("");
+      setDni("");
+      setCountry("");
+      setPhone("");
+      setCreated("");
+      setUpdated("");
+
+
+      // Redirige a la vista de entrenamiento (perfil del usuario).
+      navigate(`/training/${auth.currentUser.uid}`);
+
+
+      Swal.fire({
+        icon: "success",
+        title: "Usuario creado exitosamente",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (error) { // Maneja cualquier error que ocurra durante la creación del usuario.
+      Swal.fire({
+        icon: "error",
+        title: "Error al crear el usuario",
+        text: error.message,
+      });
+    }
   };
+
 
   // Renderizado del formulario
   // evento onsubmit: se activa cuando un usuario envía un formulario HTML asociado al elemento <form>

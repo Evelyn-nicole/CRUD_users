@@ -1,37 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../FireBaseConfig/FireBase"; // Asegúrate de que la ruta sea correcta
-import { useParams, Link } from "react-router-dom"; // Importa useParams para obtener el ID de la URL
+import { db } from "../FireBaseConfig/FireBase"; 
+import { useParams, Link } from "react-router-dom"; 
 import imagePerfil from "../assets/perfil.png";
 
 const Training = () => {
   const { id: userId } = useParams(); // Obtén el userId de los parámetros de la URL
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);// Estado para almacenar los datos del usuario 
 
   useEffect(() => {
+    // useEffect se ejecuta al montar el componente para obtener los datos del usuario
     const fetchUser = async () => {
       try {
-        const userDoc = doc(db, `users/${userId}`);
-        const userSnapshot = await getDoc(userDoc);
+        const userDoc = doc(db, `users/${userId}`); // Referencia al documento del usuario en Firestore
+        const userSnapshot = await getDoc(userDoc); // Obtener el documento del usuario
         if (userSnapshot.exists()) {
-          setUser(userSnapshot.data());
+          setUser(userSnapshot.data()); // Actualizar el estado con los datos del usuario
         } else {
           console.log("No such document!");
         }
       } catch (error) {
-        console.error("Error fetching user:", error);
+        console.error("Error fetching user:", error); 
       }
     };
 
     if (userId) {
-      fetchUser();
+      fetchUser(); // Llamar a la función para obtener los datos del usuario si userId está definido
     }
   }, [userId]);
 
   if (!user) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>; 
   }
-
+  // Función para capitalizar la primera letra de una cadena
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   };

@@ -3,27 +3,32 @@ import { collection, getDocs, query, where, doc, deleteDoc } from 'firebase/fire
 import { db } from '../FireBaseConfig/FireBase';
 import { useParams, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import '../styles.css'; // Importar el archivo CSS
+import '../styles.css'; 
 
+
+// Componente ViewTrainings
 const ViewTrainings = () => {
-  const { id } = useParams();
-  const [userTraining, setUserTraining] = useState([]);
-  const [selectedTraining, setSelectedTraining] = useState(null);
-  const navigate = useNavigate();
+  const { id } = useParams(); // Obtener el ID del usuario desde los parámetros de la URL
+  const [userTraining, setUserTraining] = useState([]); // Estado para almacenar las capacitaciones del usuario
+  const [selectedTraining, setSelectedTraining] = useState(null); // Estado para almacenar la capacitación seleccionada para ver detalles
+  const navigate = useNavigate(); // Hook para la navegación 
+
+
 
   useEffect(() => {
+    // useEffect se ejecuta al montar el componente para obtener las capacitaciones del usuario
     const fetchUserTrainings = async () => {
-      const trainingCollectionByUser = collection(db, 'training');
-      const trainingQuery = query(trainingCollectionByUser, where('userId', '==', id));
-      const trainingSnapshot = await getDocs(trainingQuery);
+      const trainingCollectionByUser = collection(db, 'training'); // Referencia a la colección 'training' en Firestore
+      const trainingQuery = query(trainingCollectionByUser, where('userId', '==', id)); // Crear una consulta para obtener capacitaciones del usuario con el ID específico
+      const trainingSnapshot = await getDocs(trainingQuery); // Ejecutar la consulta y obtener los documentos
       const trainings = trainingSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-      setUserTraining(trainings);
+      setUserTraining(trainings); // Actualizar el estado con las capacitaciones obtenidas
     };
 
-    fetchUserTrainings();
+    fetchUserTrainings(); // Llamar a la función para obtener capacitaciones
   }, [id]);
-
+  // Maneja la eliminación de una capacitación
   const handleDelete = async (trainingId) => {
     Swal.fire({
       title: '¿Desea eliminar la capacitación?',
@@ -32,9 +37,9 @@ const ViewTrainings = () => {
       cancelButtonText: 'No',
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const trainingDoc = doc(db, 'training', trainingId);
-        await deleteDoc(trainingDoc);
-        setUserTraining(userTraining.filter(training => training.id !== trainingId));
+        const trainingDoc = doc(db, 'training', trainingId); // Referencia al documento de la capacitación en Firestore
+        await deleteDoc(trainingDoc); // Eliminar el documento de la capacitación
+        setUserTraining(userTraining.filter(training => training.id !== trainingId)); // Actualizar el estado eliminando la capacitación del array
         Swal.fire({
           icon: 'success',
           title: '¡Capacitación eliminada con éxito!',
@@ -44,11 +49,11 @@ const ViewTrainings = () => {
       }
     });
   };
-
+  // Maneja la edición de una capacitación
   const handleEdit = (trainingId) => {
-    navigate(`/edit-training/${trainingId}`);
+    navigate(`/edit-training/${trainingId}`); // Navegar a la ruta de edición de capacitación
   };
-
+  // Maneja la visualización de detalles de una capacitación
   const handleViewDetails = (training) => {
     setSelectedTraining(training);
   };
@@ -57,6 +62,7 @@ const ViewTrainings = () => {
     <div className="training-background-img">
       <div className="container mt-5">
         {selectedTraining ? (
+          // Mostrar detalles de la capacitación seleccionada
           <div className="card mt-4">
             <div className="card-header">
               <h4>Detalles de la Capacitación</h4>
@@ -74,6 +80,7 @@ const ViewTrainings = () => {
             </div>
           </div>
         ) : (
+          // Mostrar la tabla de capacitaciones del usuario
           <table className="table table-striped">
             <thead>
               <tr>

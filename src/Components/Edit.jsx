@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { doc, getDoc, updateDoc } from "firebase/firestore"; // Firestore
 import { db } from "../FireBaseConfig/FireBase"; // Configuración de Firebase
 import { useNavigate, useParams, Link } from "react-router-dom"; // Navegación en React Router  useParams para obtener parámetros de la URL.
-import Swal from "sweetalert2"; // SweetAlert para alertas
-import "../styles.css"; // Importar el archivo CSS
+import Swal from "sweetalert2"; 
+import "../styles.css"; 
+
 
 const Edit = () => {
-  // Estados para los campos del formulario
   const [userName, setNameUser] = useState("");
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
@@ -77,7 +77,7 @@ const Edit = () => {
   // Se ejecuta al cargar el componente, obtiene los datos del usuario por su ID
   useEffect(() => {
     getUserById(id);
-  }, [id]);
+  }, [id]); // dependencia, useEffect se monta cada vez que cambia el id
 
   // Renderiza el formulario de edición de usuario
   return (

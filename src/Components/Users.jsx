@@ -6,14 +6,14 @@ import { db } from "../FireBaseConfig/FireBase";
 import Swal from "sweetalert2";
 
 
-// Configuracion de hooks
+
 // useState para almacenar y gestionar el estado de la lista de usuarios.
 const Users = () => {
   const [users, setUsers] = useState([]);
 
 
-  // usersCollection para acceder a la colección de usuarios en Firestore.
-  // usersCollections como una referencia a la colección de usuarios en Firestore mediante collection(db, "users").
+  // usersCollection para acceder a la colección de users en Firestore.
+  // usersCollections hace referencia a la colección de usuarios en Firestore mediante collection(db, "users").
   const usersCollections = collection(db, "users");
 
 
@@ -27,11 +27,11 @@ const Users = () => {
 
   // Funcion para eliminar un producto
   // deleteDoc: Elimina el documento de usuario especificado por id.
-  // getUsersCollection: Actualiza la lista de usuarios después de eliminar uno.
+  // para actualizar la lista de usuarios mostrada.
   const deleteUser = async (id) => {
     const userDeleteDoc = doc(db, "users", id);
     await deleteDoc(userDeleteDoc);
-    getUsersCollection();  // para actualizar la lista de usuarios mostrada.
+    getUsersCollection();  
   };
 
 
@@ -58,8 +58,8 @@ const Users = () => {
   };
 
 
-  //Uso de useeffect
-  // useEffect: Llama a getUsersCollection una vez cuando el componente se monta para obtener y mostrar la lista de usuarios.
+
+  // useEffect: Llama a getUsersCollection una vez cuando el componente se monta, obtener y muestra la lista de usuarios.
   useEffect(() => {
     getUsersCollection();
   }, []);
@@ -124,10 +124,6 @@ const Users = () => {
 
 export default Users;
 
-// Muestra una lista de usuarios almacenados en Firestore.
-// Utiliza useState y useEffect para gestionar el estado de los usuarios y cargar la lista al inicio.
-// Ofrece la funcionalidad de eliminar usuarios con una confirmación mediante SweetAlert2.
-// Proporciona enlaces para editar usuarios individuales (Editar) y botones para eliminar usuarios (Eliminar).
 
 
 
