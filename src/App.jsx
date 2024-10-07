@@ -23,6 +23,9 @@ import AccidentList from './Components/AccidentList';
 
 
 
+
+
+
 // Inicializa Firestore con la configuración de Firebase (app). lo asigna a la variable firestore.
 // Inicializa la autenticación de Firebase con la configuración de Firebase (app). Lo asigna a la variable auth.
 const firestore = getFirestore(app);
@@ -82,14 +85,14 @@ const App = () => {
         <div className="App">
           <nav
             className="navbar bg-dark navbar-expand-lg bg-body-tertiary"
-            data-bs-theme="dark"
+            data-bs-theme=""
           >
             <div className="container">
               <Link className="navbar-brand" to={"/"}>
                 <img
                   src={logo}
                   alt="SafeTRACK"
-                  style={{ height: "50px" }} // Ajusta el tamaño según sea necesario
+                  style={{ height: "55px" }} // Ajusta el tamaño según sea necesario
                 />
               </Link>
               <button
@@ -110,32 +113,32 @@ const App = () => {
                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                   <li className="nav-item m-2 mt-3">
                     <Link className="text-white" to={"/"}>
-                      Home
+                      HOME
                     </Link>
                   </li>
                   <li className="nav-item m-2 mt-3">
                     <Link className="text-white" to={"/login"}>
-                      Log In
+                      LOG IN
                     </Link>
                   </li>
                   {user !== null && getUser.role === "admin" ? (
                     <li className="nav-item m-2 mt-3">
                       <Link className="text-white" to={"/users"}>
-                        Usuarios
+                        USUARIOS
                       </Link>
                     </li>
                   ) : null}
                   {user !== null && getUser.role === "admin" ? (
                     <li className="nav-item m-2 mt-3">
                       <Link className="text-white" to={"/create"}>
-                        Crear Usuario
+                        CREAR USUARIO
                       </Link>
                     </li>
                   ) : null}
                   {user !== null && getUser.role === "user" ? (
                     <li className="nav-item m-2 mt-3">
                       <Link className="text-white" to={`/training/${user.uid}`}>
-                        Mi sesión
+                        MI SESION
                       </Link>
                     </li>
                   ) : null}
@@ -167,7 +170,7 @@ const App = () => {
               <Route path="/create-training/:id" element={<CreateTraining />} />
               <Route path="/view-trainings/:id" element={<ViewTrainings />} />
               <Route path="/accident-investigation/:id" element={<AccidentInvestigation />} />
-              <Route path="/view-accidents" element={<AccidentList />} />
+              <Route path="/view-accidents/:id" element={<AccidentList />} />
               <Route
                 path="/edit-training/:trainingId"
                 element={<EditTraining />}

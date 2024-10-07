@@ -1,25 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs, query, where, doc, deleteDoc } from 'firebase/firestore';
 import { db } from '../FireBaseConfig/FireBase';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom'; // Importar Link para el botón de "Volver"
 import Swal from 'sweetalert2';
 import '../styles.css'; 
 
 
 // Componente ViewTrainings
 const ViewTrainings = () => {
-  const { id } = useParams(); // Obtener el ID del usuario desde los parámetros de la URL
+  const { id: userId } = useParams(); // Obtener el ID del usuario desde los parámetros de la URL
   const [userTraining, setUserTraining] = useState([]); // Estado para almacenar las capacitaciones del usuario
   const [selectedTraining, setSelectedTraining] = useState(null); // Estado para almacenar la capacitación seleccionada para ver detalles
   const navigate = useNavigate(); // Hook para la navegación 
-
-
 
   useEffect(() => {
     // useEffect se ejecuta al montar el componente para obtener las capacitaciones del usuario
     const fetchUserTrainings = async () => {
       const trainingCollectionByUser = collection(db, 'training'); // Referencia a la colección 'training' en Firestore
-      const trainingQuery = query(trainingCollectionByUser, where('userId', '==', id)); // Crear una consulta para obtener capacitaciones del usuario con el ID específico
+      const trainingQuery = query(trainingCollectionByUser, where('userId', '==', userId)); // Crear una consulta para obtener capacitaciones del usuario con el ID específico
       const trainingSnapshot = await getDocs(trainingQuery); // Ejecutar la consulta y obtener los documentos
       const trainings = trainingSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
@@ -27,7 +25,8 @@ const ViewTrainings = () => {
     };
 
     fetchUserTrainings(); // Llamar a la función para obtener capacitaciones
-  }, [id]);
+  }, [userId]);
+
   // Maneja la eliminación de una capacitación
   const handleDelete = async (trainingId) => {
     Swal.fire({
@@ -49,10 +48,12 @@ const ViewTrainings = () => {
       }
     });
   };
+
   // Maneja la edición de una capacitación
   const handleEdit = (trainingId) => {
     navigate(`/edit-training/${trainingId}`); // Navegar a la ruta de edición de capacitación
   };
+
   // Maneja la visualización de detalles de una capacitación
   const handleViewDetails = (training) => {
     setSelectedTraining(training);
@@ -80,39 +81,49 @@ const ViewTrainings = () => {
             </div>
           </div>
         ) : (
-          // Mostrar la tabla de capacitaciones del usuario
-          <table className="table table-striped">
-            <thead>
-              <tr>
-                <th>Título</th>
-                <th>Instructor</th>
-                <th>Fecha de Inicio</th>
-                <th>Fecha de Fin</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {userTraining.map(training => (
-                <tr key={training.id}>
-                  <td>{training.title}</td>
-                  <td>{training.trainer}</td>
-                  <td>{training.startDate}</td>
-                  <td>{training.endDate}</td>
-                  <td>
-                    <button className="btn btn-primary mx-1" onClick={() => handleEdit(training.id)}>
-                      <i className="fas fa-pencil-alt"></i>
-                    </button>
-                    <button className="btn btn-danger mx-1" onClick={() => handleDelete(training.id)}>
-                      <i className="fas fa-trash"></i>
-                    </button>
-                    <button className="btn btn-info mx-1" onClick={() => handleViewDetails(training)}>
-                      <i className="fas fa-eye"></i>
-                    </button>
-                  </td>
+          <>
+            {/* Agregar el título del listado de capacitaciones */}
+            <h2 className="training-list-title">Listado de Capacitaciones</h2>
+  
+            {/* Tabla de capacitaciones del usuario */}
+            <table className="table table-striped">
+              <thead>
+                <tr>
+                  <th>Título</th>
+                  <th>Instructor</th>
+                  <th>Fecha de Inicio</th>
+                  <th>Fecha de Fin</th>
+                  <th>Acciones</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {userTraining.map(training => (
+                  <tr key={training.id}>
+                    <td>{training.title}</td>
+                    <td>{training.trainer}</td>
+                    <td>{training.startDate}</td>
+                    <td>{training.endDate}</td>
+                    <td>
+                      <button className="btn btn-primary mx-1" onClick={() => handleEdit(training.id)}>
+                        <i className="fas fa-pencil-alt"></i>
+                      </button>
+                      <button className="btn btn-danger mx-1" onClick={() => handleDelete(training.id)}>
+                        <i className="fas fa-trash"></i>
+                      </button>
+                      <button className="btn btn-info mx-1" onClick={() => handleViewDetails(training)}>
+                        <i className="fas fa-eye"></i>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+  
+            {/* Botón de enlace para volver a la vista de capacitación */}
+            <Link className="btn btn-danger mt-3" to={`/training/${userId}`}>
+              Volver
+            </Link>
+          </>
         )}
       </div>
     </div>

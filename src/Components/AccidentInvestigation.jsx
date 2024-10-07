@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../FireBaseConfig/FireBase'; // Importar Firestore
-import { useParams } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { doc, getDoc, collection, addDoc } from 'firebase/firestore';
 import Swal from 'sweetalert2';
 import '../styles.css';
@@ -9,6 +9,7 @@ const AccidentInvestigation = () => {
   const { id: userId } = useParams(); // Obtener el userId de la URL
   const [user, setUser] = useState(null); // Datos del usuario
   const [isLoading, setIsLoading] = useState(true); // Estado de carga
+  const navigate = useNavigate(); // Para redirigir al usuario a otra página
   const [accidentDetails, setAccidentDetails] = useState({
     date: '',
     time: '',
@@ -70,6 +71,9 @@ const AccidentInvestigation = () => {
         title: '¡Investigación registrada con éxito!',
         text: 'El registro del accidente ha sido guardado.',
         confirmButtonText: 'Aceptar'
+      }).then(() => {
+        // Redirigir a la página de training después de la creación exitosa
+        navigate(`/training/${userId}`);
       });
 
       // Limpiar el formulario después de enviarlo
@@ -105,8 +109,9 @@ const AccidentInvestigation = () => {
   }
 
   return (
+
     <div className="accident-investigation container">
-      <h2>Investigación de Accidentes User {user.userName}</h2>
+      <h2>Investigación de Accidentes</h2>
       <form onSubmit={handleSubmit} className="row">
         {/* Formulario del accidente */}
         <div className="col-md-6">
@@ -217,6 +222,10 @@ const AccidentInvestigation = () => {
 
         <div className="col-md-12 text-center mt-4">
           <button type="submit" className="btn btn-primary">Registrar Investigación</button>
+          {/* Botón de enlace para volver a la vista de capacitación */}
+          <Link className="btn btn-red ms-2" to={`/training/${userId}`}>
+            Volver
+          </Link>
         </div>
       </form>
     </div>

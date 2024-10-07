@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../FireBaseConfig/FireBase"; 
-import { useParams, Link } from "react-router-dom"; 
+import { db } from "../FireBaseConfig/FireBase";
+import { useParams, Link } from "react-router-dom";
 import imagePerfil from "../assets/perfil.png";
 
 const Training = () => {
@@ -20,7 +20,7 @@ const Training = () => {
           console.log("No such document!");
         }
       } catch (error) {
-        console.error("Error fetching user:", error); 
+        console.error("Error fetching user:", error);
       }
     };
 
@@ -30,7 +30,7 @@ const Training = () => {
   }, [userId]);
 
   if (!user) {
-    return <div>Loading...</div>; 
+    return <div>Loading...</div>;
   }
   // Función para capitalizar la primera letra de una cadena
   const capitalizeFirstLetter = (string) => {
@@ -39,7 +39,7 @@ const Training = () => {
 
   return (
     <div className="training-background">
-      <div  className="training-content">
+      <div className="training-content">
         <div className="card text-center training-card">
           <img src={imagePerfil} alt="Perfil" className="card-img-perfil" />
           <div className="card-body">
@@ -63,15 +63,16 @@ const Training = () => {
               to={`/view-trainings/${userId}`}
               className="btn btn-secondary ms-2"
             >
-              Mis Capacitaciones
+              Listado de Capacitaciones
             </Link>
+
             {/* Botones añadidos para la creación y visualización de accidentes */}
             <Link to={`/accident-investigation/${userId}`} className="btn btn-warning ms-2">
               Crear Registro de Accidentes
             </Link>
 
-            <Link to="/view-accidents" className="btn btn-info ms-2">
-              Ver Listado de Accidentes
+            <Link to={`/view-accidents/${userId}`} className="btn btn-info ms-2">
+              Listado de Accidentes
             </Link>
           </div>
         </div>
