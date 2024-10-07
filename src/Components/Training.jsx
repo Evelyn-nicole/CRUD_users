@@ -65,6 +65,14 @@ const Training = () => {
             >
               Mis Capacitaciones
             </Link>
+            {/* Botones añadidos para la creación y visualización de accidentes */}
+            <Link to={`/accident-investigation/${userId}`} className="btn btn-warning ms-2">
+              Crear Registro de Accidentes
+            </Link>
+
+            <Link to="/view-accidents" className="btn btn-info ms-2">
+              Ver Listado de Accidentes
+            </Link>
           </div>
         </div>
       </div>

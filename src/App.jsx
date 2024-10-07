@@ -5,9 +5,9 @@ import Users from "./Components/Users";
 import Edit from "./Components/Edit";
 import Home from "./Components/Home";
 import Login from "./Components/Login";
-import CreateUser from "./Components/CreateUser";
+import CreateUserForm from "./Components/CreateUserform";  // Cambiado para usar el nuevo formulario
 import ViewTrainings from "./Components/ViewTrainings";
-import Training from "./Components/Trainig";
+import Training from "./Components/Training";
 import CreateTraining from "./Components/CreateTraining";
 import EditTraining from "./Components/EditTraining";
 import Footer from "./Components/Footer";
@@ -18,6 +18,9 @@ import { useState, useEffect } from "react";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import "./styles.css";
 import logo from './assets/logoCental.png'
+import AccidentInvestigation from './Components/AccidentInvestigation';
+import AccidentList from './Components/AccidentList';
+
 
 
 // Inicializa Firestore con la configuración de Firebase (app). lo asigna a la variable firestore.
@@ -122,6 +125,13 @@ const App = () => {
                       </Link>
                     </li>
                   ) : null}
+                  {user !== null && getUser.role === "admin" ? (
+                    <li className="nav-item m-2 mt-3">
+                      <Link className="text-white" to={"/create"}>
+                        Crear Usuario
+                      </Link>
+                    </li>
+                  ) : null}
                   {user !== null && getUser.role === "user" ? (
                     <li className="nav-item m-2 mt-3">
                       <Link className="text-white" to={`/training/${user.uid}`}>
@@ -152,10 +162,12 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/users" element={<Users />} />
-              <Route path="/create" element={<CreateUser />} />
+              <Route path="/create" element={<CreateUserForm />} />  
               <Route path="/training/:id" element={<Training />} />
               <Route path="/create-training/:id" element={<CreateTraining />} />
               <Route path="/view-trainings/:id" element={<ViewTrainings />} />
+              <Route path="/accident-investigation/:id" element={<AccidentInvestigation />} />
+              <Route path="/view-accidents" element={<AccidentList />} />
               <Route
                 path="/edit-training/:trainingId"
                 element={<EditTraining />}
@@ -171,7 +183,3 @@ const App = () => {
 };
 
 export default App;
-// El unSuscribe se asegura de que el estado de autenticación del usuario esté siempre actualizado.
-    // Cada vez que se inicia o cierra sesión, el estado user en el componente se actualiza en consecuencia. 
-    // La función de limpieza (unsubscribe) se asegura de que se elimine el observador cuando el componente se desmonta, esto para 
-    // mantener la aplicación eficiente y libre de fugas de memoria.  

@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { doc, addDoc, getFirestore } from "firebase/firestore";
 import { app } from "../FireBaseConfig/FireBase"; // Configuración de Firebase
@@ -172,3 +173,5 @@ export default CreateTraining;
 // El componente CreateTraining permite crear nuevas capacitaciones utilizando un formulario en React. Utiliza Firebase para almacenar los datos en Firestore, 
 // maneja errores de creación y muestra alertas de éxito o error utilizando SweetAlert2. Al finalizar la creación, limpia los campos del formulario y redirige 
 // al usuario a la página /training/xy9LaCjo3dXnECTughse6aB1Ljw2.
+
+
