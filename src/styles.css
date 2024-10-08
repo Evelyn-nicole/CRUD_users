@@ -370,7 +370,51 @@ body {
   margin-top: 10px; 
 }
 
+/*CSS FORMULARIO CREACION DE USUARIO, Se ocupa el mismo css que el de editar usuario
+/* Centrar el formulario con Flexbox y agregar imagen de fondo */
+.createUser {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Ocupa el 100% de la altura de la ventana */
+  background-image: url('src\assets\login20.png'); /* Ruta de la imagen de fondo */
+  background-size: cover; /* Asegura que la imagen cubra todo el fondo */
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
+/* Mantener el estilo del formulario */
+.createUser .card {
+  max-width: 600px;
+  width: 100%;
+  border: 2px solid #007bff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  padding: 20px;
+  background-color: rgba(248, 249, 250, 0.9); /* Fondo claro y transparente para el formulario */
+}
 
+.createUser .card-header {
+  background-color: #007bff;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+}
 
+.createUser .card-body {
+  padding: 20px;
+}
+
+.createUser .form-label {
+  font-weight: bold;
+}
+
+.createUser .form-control {
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.createUser .btn {
+  margin-top: 10px;
+}
 

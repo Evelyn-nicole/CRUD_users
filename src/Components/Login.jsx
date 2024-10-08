@@ -131,9 +131,9 @@ const Login = () => {
                       </a>
                     </div> */}
                     <div className="text-center mt-3">
-                      <Link className="text-black" to={"/Create"}>
+                      {/* <Link className="text-black" to={"/Create"}>
                         ¿No tienes una cuenta? Registrate
-                      </Link>
+                      </Link> */}
                     </div>
                   </div>
                 </div>
