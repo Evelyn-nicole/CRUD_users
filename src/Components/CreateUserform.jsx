@@ -13,10 +13,17 @@ const CreateUserForm = () => {
   const [dni, setDni] = useState('');
   const [country, setCountry] = useState('');
   const [phone, setPhone] = useState('');
-  const [role, setRole] = useState('trabajador');
+  const [role, setRole] = useState('');
   const auth = getAuth();
   const firestore = getFirestore();
   const navigate = useNavigate();
+
+  const handleInputChange = (setter, validation) => (e) => {
+    const { value } = e.target;
+    if (validation(value)) {
+      setter(value);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -99,7 +106,8 @@ const CreateUserForm = () => {
                 type="text"
                 className="form-control"
                 value={userName}
-                onChange={(e) => setUserName(e.target.value)}
+                onChange={handleInputChange(setUserName, (value) => /^[a-zA-ZáéíóúÁÉÍÓÚ ]*$/.test(value))}
+                placeholder="Ingrese nombre:"
                 required
               />
             </div>
@@ -109,7 +117,8 @@ const CreateUserForm = () => {
                 type="text"
                 className="form-control"
                 value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                onChange={handleInputChange(setLastName, (value) => /^[a-zA-ZáéíóúÁÉÍÓÚ ]*$/.test(value))}
+                placeholder="Ingrese apellido:"
                 required
               />
             </div>
@@ -120,6 +129,7 @@ const CreateUserForm = () => {
                 className="form-control"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                placeholder="Ingrese correo electrónico:"
                 required
               />
             </div>
@@ -130,6 +140,7 @@ const CreateUserForm = () => {
                 className="form-control"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                placeholder="Ingrese contraseña:"
                 required
               />
             </div>
@@ -140,15 +151,17 @@ const CreateUserForm = () => {
                 className="form-control"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
+                placeholder="Ingrese dirección:"
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">DNI/RUT</label>
+              <label className="form-label">RUT</label>
               <input
                 type="text"
                 className="form-control"
                 value={dni}
-                onChange={(e) => setDni(e.target.value)}
+                onChange={handleInputChange(setDni, (value) => /^[0-9.-]*$/.test(value))}
+                placeholder="Ingrese RUT (ej: 12.345.678-9):"
               />
             </div>
             <div className="mb-3">
@@ -157,7 +170,8 @@ const CreateUserForm = () => {
                 type="text"
                 className="form-control"
                 value={country}
-                onChange={(e) => setCountry(e.target.value)}
+                onChange={handleInputChange(setCountry, (value) => /^[a-zA-ZáéíóúÁÉÍÓÚ ]*$/.test(value))}
+                placeholder="Ingrese país:"
               />
             </div>
             <div className="mb-3">
@@ -166,7 +180,8 @@ const CreateUserForm = () => {
                 type="tel"
                 className="form-control"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={handleInputChange(setPhone, (value) => /^[0-9]*$/.test(value))}
+                placeholder="Ingrese número de teléfono:"
               />
             </div>
             <div className="mb-3">
@@ -175,12 +190,17 @@ const CreateUserForm = () => {
                 className="form-control"
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
+                required
               >
-                <option value="trabajador">Trabajador</option>
+                <option value="" disabled>
+                  Seleccione un Rol
+                </option>
+                <option value="trabajador">Prevencionista de riesgo</option>
                 <option value="supervisor">Supervisor</option>
-                <option value="prevencionista">Prevencionista de riesgo</option>
+                <option value="prevencionista">Trabajador</option>
               </select>
             </div>
+
             <button type="submit" className="btn btn-primary">
               Crear Usuario
             </button>

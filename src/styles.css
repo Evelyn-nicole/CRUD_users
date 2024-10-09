@@ -2,6 +2,74 @@ body {
   background: url('./assets/login20.png') no-repeat center center/cover;
 }
 
+
+
+
+
+
+
+/**********************************************************************************************/
+/* Estilos para el navbar */
+.navbar {
+  background: linear-gradient(180deg, #2c3e50, #000000); /* Degradado vertical */
+  border-bottom: 2px solid #ff9800; /* Línea de borde naranja */
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 10px; /* Añadir un poco de espacio alrededor */
+}
+
+/* Transición suave para los enlaces */
+.navbar a {
+  color: #ffffff; /* Texto blanco */
+  font-size: 16px;
+  padding: 10px 15px;
+  text-decoration: none;
+  transition: color 0.3s ease; /* Transición suave para hover */
+}
+
+/* Cambia color de los enlaces al hacer hover */
+.navbar a:hover {
+  color: #ff9800; /* Naranja brillante en hover */
+}
+
+/* Logo normal */
+.navbar-brand img {
+  height: 50px; /* Tamaño del logo por defecto */
+  transition: transform 0.4s ease; /* Transición suave para agrandar */
+}
+
+/* Logo agrandado al hacer hover */
+.navbar-brand img:hover {
+  transform: scale(1.2); /* Agranda el logo en un 20% */
+}
+
+/* Botón del menú en móviles */
+.navbar-toggler {
+  border-color: #ffffff; /* Color del botón de menú en móviles */
+}
+
+/* Estilos para el nombre de usuario */
+.navbar .rounded-pill {
+  background-color: #ff9800; /* Fondo naranja para el nombre de usuario */
+  padding: 5px 10px;
+}
+
+/* Estilos para el botón de cerrar sesión */
+.navbar .rounded-pill button {
+  background-color: #e74c3c; /* Botón de cerrar sesión rojo */
+  border: none;
+  transition: background-color 0.3s ease; /* Transición suave para hover */
+}
+
+.navbar .rounded-pill button:hover {
+  background-color: #c0392b; /* Rojo más oscuro en hover */
+}
+
+/******************************************************************************/
+
+
+
+
   /* Styles LOGIN */
   .login-page .login-background {
     /* display: flex; */
@@ -35,6 +103,14 @@ body {
     margin: 0;
     text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.9); 
   }
+  .training-list-title {
+    font-size: 32px; 
+    font-weight: bold;
+    color: #ffffff; 
+    text-align: center; 
+    margin-bottom: 20px; 
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Sombra para mejorar el contraste */
+  }
   
   /* Form styles */
   .login-page form {
@@ -58,21 +134,19 @@ body {
     box-shadow: none;
   }
   
-  .login-page .btn-primary {
-    background-color: #ffffff;
-    color: #000;
+  .login-page .btn-sesion {
+    background-color: #007bff; /* Azul tipo Bootstrap primary */
+    color: #ffffff;
     border-radius: 30px;
     padding: 10px;
     border: none;
+    transition: background-color 0.3s ease;
   }
   
-  .login-page .btn-primary:hover {
-    background-color: #e0e0e0;
+  .login-page .btn-sesion:hover {
+    background-color: #0056b3; /* Un tono más oscuro en hover */
   }
   
-  .login-page .form-check-input {
-    margin-top: 0.3rem;
-  }
   
   .login-page .text-white {
     color: white;
@@ -80,14 +154,24 @@ body {
   
   /* Link styles */
   .login-page a {
+    color: #ff9800;
     text-decoration: none;
   }
   
   .login-page a:hover {
+    color: #e67e22; /* Un color más oscuro al hacer hover */
     text-decoration: underline;
   }
 
-
+/* Estilo para el título de inicio de sesión */
+.title-login {
+  font-size: 15px; 
+  font-weight: bold;
+  color: #f6f6f6;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgb(0, 0, 0); /* Sombra para mejor contraste */
+}
 
 
   /**********************************************************************/
@@ -201,14 +285,37 @@ body {
   flex: 1;
 }
 
-/* Footer */
+/* Estilos para el footer con degradado */
 .footer {
-  background-color: #343a40; 
-  color: white;
+  background: linear-gradient(180deg, #2c3e50, #000000); /* Degradado vertical */
+  border-top: 2px solid #ff9800; /* Línea de borde naranja en la parte superior */
+  border-top-left-radius: 10px; /* Borde redondeado solo en la parte superior izquierda */
+  border-top-right-radius: 10px; /* Borde redondeado solo en la parte superior derecha */
+  padding: 20px; /* Añadir un poco de espacio */
   text-align: center;
-  padding: 1rem 0;
-  margin-top: auto;
+  color: #ffffff; /* Texto blanco */
 }
+
+/* Enlaces del footer */
+.footer a {
+  color: #ff9800; /* Naranja brillante para los enlaces */
+  text-decoration: none;
+  transition: color 0.3s ease; /* Transición suave para hover */
+}
+
+/* Enlaces del footer al pasar el mouse */
+.footer a:hover {
+  color: #ffb74d; /* Naranja más claro en hover */
+}
+
+/* Ajustes para el texto del footer */
+.footer p {
+  margin: 0;
+  padding: 5px 0;
+  color: #f1f1f1; /* Texto gris claro */
+  font-size: 14px;
+}
+
 
 /**********************************************************************/
 
@@ -219,19 +326,26 @@ body {
 }
 
 .home-header {
-  background: rgba(241, 236, 236, 0.242); /* Fondo semi-transparente */
+  /* background: rgba(241, 236, 236, 0.242);  */
   padding: 2rem;
-  border-radius: 0.5rem;
+  border-radius: 0.8rem;
 }
 
 .text-shadow {
   text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.96); 
-
 }
 
 .home-card {
-  background: rgba(184, 181, 225, 0.382); /* Fondo semi-transparente */
+  background: rgba(98, 90, 217, 0.229); /* Fondo semi-transparente */
   border: none; 
+  border: 4px solid #cccdd330; /* Bordes sutiles */
+  box-shadow: 0 4px 6px rgba(255, 252, 252, 0.914); /* Sombra sutil */
+  padding: 10px; /* Más espacio interno */
+  transition: transform 0.6s ease-in-out; /* Añadir animación */
+}
+
+.home-card:hover {
+  transform: scale(1.07); /* Animación de zoom al pasar el ratón */
 }
 
 .home-card-img {
@@ -244,23 +358,47 @@ body {
   border-top: none;
 }
 
-.card-title{
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
-}
-
 .home-card .card-text {
   text-align: justify; 
 }
 
+/* Estilo del título principal */
+.home-title1 {
+  font-family: 'Acme', sans-serif;
+  font-size: 3.0rem;
+  font-weight: 600;
+  color: #0c2641; /* Naranja oscuro que complementa bien */
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.997); /* Sombra sutil para hacer que resalte */
+}
+
+.home-title {
+  font-family: 'Acme', sans-serif;
+  font-size: 5.5rem;
+  font-weight: 600;
+  color: #0c2641; /* Naranja oscuro que complementa bien */
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.997); /* Sombra sutil para hacer que resalte */
+}
+
+/* Estilo del subtítulo */
+.home-subtitle {
+  font-family: 'Acme', sans-serif;
+  font-size: 2.0rem;
+  font-weight: 500;
+  color: #0c2641; /* Gris medio para subtítulo */
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.997); /* Sombra sutil para resaltar */
+}
+
+.btn-info1 {
+  background-color: #e66621; /* Azul intenso */
+  border-color: #f5f5f6f7;
+  color: #fff; /* Texto blanco */
+}
 
 
 /**********************************************************************/
 
-
-
-
-
 /* CREATE TRAINING*/
+
 .create-training {
   max-width: 600px;
   margin: auto;
@@ -296,6 +434,18 @@ body {
   margin-top: 10px;
 }
 
+/**********************************************************************/
+
+/* Estilo WIEW TRAINING */
+
+.training-list-title {
+  font-size: 32px; 
+  font-weight: bold;
+  color: #ffffff; 
+  text-align: center; 
+  margin-bottom: 20px; 
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Sombra para mejorar el contraste */
+}
 
 
 
@@ -417,4 +567,132 @@ body {
 .createUser .btn {
   margin-top: 10px;
 }
+
+/**********************************************************************/
+/* Styles ACCIDENT INVESTIGATION */
+
+.accident-investigation {
+  padding: 40px;
+  background-color: rgba(255, 255, 255, 0.8); 
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 40px auto;
+  max-width: 900px;
+}
+
+.accident-investigation h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.accident-investigation .form-label {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.accident-investigation .form-control {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.accident-investigation .btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.accident-investigation .btn:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo para el botón rojo en su estado normal */
+.accident-investigation .btn-red {
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Estilo para el botón rojo cuando se pasa el ratón (hover) */
+.accident-investigation .btn-red:hover {
+  background-color: darkred;
+  color: white;
+}
+
+
+.section-title h3 {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .accident-investigation {
+    padding: 20px;
+    max-width: 100%;
+  }
+}
+
+
+/**********************************************************************/
+
+/* Estilos personalizados para la lista de accidentes */
+.accident-list {
+  margin: 40px auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+}
+
+.accident-list-title {
+  font-size: 32px; /* Tamaño más grande */
+  font-weight: bold; /* Negrita */
+  color: white; /* Color blanco */
+  text-align: center; /* Centrado */
+  margin-bottom: 20px; /* Margen inferior */
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Sombra para mejorar el contraste */
+}
+
+
+.accident-list .list-group-item {
+  margin-bottom: 15px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+.accident-list .list-group-item strong {
+  color: #333;
+}
+
+/* Botón rojo */
+.btn-red {
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-red:hover {
+  background-color: darkred;
+  color: white;
+}
+
+/**********************************************************************/
+
 

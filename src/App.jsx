@@ -7,7 +7,7 @@ import Home from "./Components/Home";
 import Login from "./Components/Login";
 import CreateUserForm from "./Components/CreateUserform";  // Cambiado para usar el nuevo formulario
 import ViewTrainings from "./Components/ViewTrainings";
-import Training from "./Components/Trainig";
+import Training from "./Components/Training";
 import CreateTraining from "./Components/CreateTraining";
 import EditTraining from "./Components/EditTraining";
 import Footer from "./Components/Footer";
@@ -18,6 +18,12 @@ import { useState, useEffect } from "react";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import "./styles.css";
 import logo from './assets/logoCental.png'
+import AccidentInvestigation from './Components/AccidentInvestigation';
+import AccidentList from './Components/AccidentList';
+
+
+
+
 
 
 // Inicializa Firestore con la configuración de Firebase (app). lo asigna a la variable firestore.
@@ -79,14 +85,14 @@ const App = () => {
         <div className="App">
           <nav
             className="navbar bg-dark navbar-expand-lg bg-body-tertiary"
-            data-bs-theme="dark"
+            data-bs-theme=""
           >
             <div className="container">
               <Link className="navbar-brand" to={"/"}>
                 <img
                   src={logo}
                   alt="SafeTRACK"
-                  style={{ height: "50px" }} // Ajusta el tamaño según sea necesario
+                  style={{ height: "55px" }} // Ajusta el tamaño según sea necesario
                 />
               </Link>
               <button
@@ -107,32 +113,32 @@ const App = () => {
                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                   <li className="nav-item m-2 mt-3">
                     <Link className="text-white" to={"/"}>
-                      Home
+                      HOME
                     </Link>
                   </li>
                   <li className="nav-item m-2 mt-3">
                     <Link className="text-white" to={"/login"}>
-                      Log In
+                      LOG IN
                     </Link>
                   </li>
                   {user !== null && getUser.role === "admin" ? (
                     <li className="nav-item m-2 mt-3">
                       <Link className="text-white" to={"/users"}>
-                        Usuarios
+                        USUARIOS
                       </Link>
                     </li>
                   ) : null}
                   {user !== null && getUser.role === "admin" ? (
                     <li className="nav-item m-2 mt-3">
                       <Link className="text-white" to={"/create"}>
-                        Crear Usuario
+                        CREAR USUARIO
                       </Link>
                     </li>
                   ) : null}
                   {user !== null && getUser.role === "user" ? (
                     <li className="nav-item m-2 mt-3">
                       <Link className="text-white" to={`/training/${user.uid}`}>
-                        Mi sesión
+                        MI SESION
                       </Link>
                     </li>
                   ) : null}
@@ -159,10 +165,12 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/users" element={<Users />} />
-              <Route path="/create" element={<CreateUserForm />} />  {/* Cambiado para usar el nuevo formulario */}
+              <Route path="/create" element={<CreateUserForm />} />  
               <Route path="/training/:id" element={<Training />} />
               <Route path="/create-training/:id" element={<CreateTraining />} />
               <Route path="/view-trainings/:id" element={<ViewTrainings />} />
+              <Route path="/accident-investigation/:id" element={<AccidentInvestigation />} />
+              <Route path="/view-accidents/:id" element={<AccidentList />} />
               <Route
                 path="/edit-training/:trainingId"
                 element={<EditTraining />}

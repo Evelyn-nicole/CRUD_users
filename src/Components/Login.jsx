@@ -68,7 +68,7 @@ const Login = () => {
   // Renderiza el formulario de inicio de sesión
   return (
     <>
-      <div className="title-login text-white mt-5 mb-3">
+      <div className="title-login mt-5 mb-3">
         <h1>INICIO DE SESION</h1>
       </div>
       <div className="login-page">
@@ -108,20 +108,7 @@ const Login = () => {
                           data-testid="password-input"
                         />
                       </div>
-                      <div className="mb-3 form-check">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                          id="rememberMe"
-                        />
-                        <label
-                          className="form-check-label text-black"
-                          htmlFor="rememberMe"
-                        >
-                          Remember me
-                        </label>
-                      </div>
-                      <button type="submit" className="btn btn-primary w-100">
+                      <button type="submit" className="btn btn-sesion mt-5 w-100">
                         Aceptar
                       </button>
                     </form>
