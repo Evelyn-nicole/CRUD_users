@@ -20,7 +20,9 @@ const AccidentInvestigation = () => {
     employeeLastName: '',
     employeePosition: '',
     employeeAge: '',
-    employeeRut: ''
+    employeeRut: '',
+    responsable: '', // Añadimos el responsable
+    responsablePosition: '', // Añadimos el cargo del responsable
   });
 
   // Función para obtener los datos del usuario desde Firestore
@@ -63,7 +65,8 @@ const AccidentInvestigation = () => {
       await addDoc(collection(db, "accident_investigations"), {
         ...accidentDetails,
         userId, // Agregar el ID del usuario que registró la investigación
-        createdAt: new Date() // Añadir la fecha de creación
+        createdAt: new Date(), // Añadir la fecha de creación
+        updates: [], // Añadimos el historial de actualizaciones vacío
       });
 
       Swal.fire({
@@ -87,7 +90,9 @@ const AccidentInvestigation = () => {
         employeeLastName: '',
         employeePosition: '',
         employeeAge: '',
-        employeeRut: ''
+        employeeRut: '',
+        responsable: '',
+        responsablePosition: '', // Limpiar el campo del cargo del responsable
       });
     } catch (error) {
       Swal.fire({
@@ -109,7 +114,6 @@ const AccidentInvestigation = () => {
   }
 
   return (
-
     <div className="accident-investigation container">
       <h2>Investigación de Accidentes</h2>
       <form onSubmit={handleSubmit} className="row">
@@ -158,6 +162,30 @@ const AccidentInvestigation = () => {
             onChange={handleChange}
             required
           ></textarea>
+        </div>
+
+        {/* Responsable y Cargo del Responsable */}
+        <div className="col-md-6">
+          <label className="form-label">Responsable</label>
+          <input
+            type="text"
+            name="responsable"
+            className="form-control"
+            value={accidentDetails.responsable}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="col-md-6">
+          <label className="form-label">Cargo del Responsable</label>
+          <input
+            type="text"
+            name="responsablePosition"
+            className="form-control"
+            value={accidentDetails.responsablePosition}
+            onChange={handleChange}
+            required
+          />
         </div>
 
         {/* Campos del accidentado */}

@@ -645,53 +645,110 @@ body {
 
 /**********************************************************************/
 
-/* Estilos personalizados para la lista de accidentes */
-.accident-list {
-  margin: 40px auto;
+/* Estilos para AccidentList */
+.accident-list-container {
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.95);
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow-x: auto;
 }
 
 .accident-list-title {
-  font-size: 32px; /* Tamaño más grande */
-  font-weight: bold; /* Negrita */
-  color: white; /* Color blanco */
-  text-align: center; /* Centrado */
-  margin-bottom: 20px; /* Margen inferior */
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Sombra para mejorar el contraste */
+  font-size: 36px;
+  font-weight: bold;
+  color: #ffffff; /* Color más oscuro para el título */
+  text-align: center;
+  margin-bottom: 40px;
+  margin-top: 30px;
+  text-shadow: 2px 2px 2px rgb(0, 0, 0);
 }
 
-
-.accident-list .list-group-item {
-  margin-bottom: 15px;
-  padding: 15px;
-  border: 1px solid #ddd;
+.accident-list-table {
+  width: 100%;
+  margin-bottom: 20px;
   background-color: #f9f9f9;
-  border-radius: 5px;
+  border-radius: 8px;
 }
 
-.accident-list .list-group-item strong {
-  color: #333;
+.accident-list-table th,
+.accident-list-table td {
+  padding: 15px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
 }
 
-/* Botón rojo */
-.btn-red {
-  background-color: red;
-  color: white;
-  padding: 10px 20px;
+.accident-list-table .thead-dark {
+  background-color: #343a40;
+  color: #fff;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Botones mejorados y espaciados para AccidentList */
+.btn-accident-primary,
+.btn-accident-danger,
+.btn-accident-success,
+.btn-accident-add-corrective {
+  width: 80px; /* Botones más pequeños */
+  color: #fff;
   border: none;
+  padding: 6px 10px; /* Reducir padding */
+  font-size: 12px; /* Reducir tamaño de texto */
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 5px;
+  margin-right: 10px; /* Espacio entre botones */
+}
+
+/* Estilo especial para el botón de medidas correctivas */
+.btn-accident-add-corrective {
+  width: 120px; /* Hacerlo más largo */
+  font-size: 12px; /* Ajuste de tamaño de texto */
+  background-color: #0a26319c;
+}
+
+.btn-accident-primary {
+  background-color: #007bff;
+}
+
+.btn-accident-danger {
+  background-color: #ff0000;
+}
+
+.btn-accident-success {
+  background-color: #28a745;
+}
+
+.btn-accident-back {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
   border-radius: 4px;
   cursor: pointer;
   text-decoration: none;
+  display: inline-block;
 }
 
-.btn-red:hover {
-  background-color: darkred;
-  color: white;
+.btn-accident-back:hover,
+.btn-accident-primary:hover,
+.btn-accident-danger:hover,
+.btn-accident-success:hover,
+.btn-accident-add-corrective:hover {
+  opacity: 0.8;
 }
+
+/* Mejora del espaciado de la tabla */
+.accident-list-table td {
+  padding: 15px 10px;
+}
+
 
 /**********************************************************************/
 
