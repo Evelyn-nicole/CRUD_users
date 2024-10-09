@@ -74,7 +74,7 @@ const App = () => {
       timer: 2000,
     }).then(() => {
       signOut(auth).then(() => {
-        window.location.href = "/"; 
+        window.location.href = "/";
       });
     });
   };
@@ -135,7 +135,7 @@ const App = () => {
                       </Link>
                     </li>
                   ) : null}
-                  {user !== null && getUser.role === "user" ? (
+                  {user !== null && (getUser.role === "supervisor" || getUser.role === "prevencionista") ? (
                     <li className="nav-item m-2 mt-3">
                       <Link className="text-white" to={`/training/${user.uid}`}>
                         MI SESION
@@ -165,7 +165,7 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/users" element={<Users />} />
-              <Route path="/create" element={<CreateUserForm />} />  
+              <Route path="/create" element={<CreateUserForm />} />
               <Route path="/training/:id" element={<Training />} />
               <Route path="/create-training/:id" element={<CreateTraining />} />
               <Route path="/view-trainings/:id" element={<ViewTrainings />} />
