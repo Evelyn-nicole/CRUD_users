@@ -239,9 +239,9 @@ const CreateUserForm = () => {
                 <option value="" disabled>
                   Seleccione un rol
                 </option>
-                <option value="trabajador">Prevencionista de riesgo</option>
+                <option value="prevencionista">Prevencionista de riesgo</option>
                 <option value="supervisor">Supervisor</option>
-                <option value="prevencionista">Trabajador</option>
+                <option value="trabajador">Trabajador</option>
               </select>
             </div>
 
