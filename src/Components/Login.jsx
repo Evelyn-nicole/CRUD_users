@@ -1,46 +1,41 @@
-import React from "react"; 
+import React from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"; // Importa funciones de autenticación de Firebase.
 import { Link, useNavigate } from "react-router-dom"; // Importa hooks y componentes de navegación de react-router-dom.
 import { app } from "../FireBaseConfig/FireBase"; // Importa la configuración de Firebase.
 import { doc, getDoc, getFirestore } from "firebase/firestore"; // Importa funciones de Firestore.
 import Swal from "sweetalert2";
 
-
-// Iniciliza las Instancias de Firestore y Auth
+// Inicializa Firestore con la configuración de Firebase (app). Lo asigna a la variable firestore.
 const firestore = getFirestore(app);
 const auth = getAuth(app);
 
-
-// Define el componente Login.
 const Login = () => {
   const navigate = useNavigate(); // Hook para redireccionar a diferentes rutas.
 
-
-   // Función para manejar el envío del formulario de inicio de sesión.
   const submithandler = async (e) => {
     e.preventDefault(); // Previene la recarga de la página al enviar el formulario.
 
-    
-    // Obtiene el email y la contraseña de los elementos del formulario.
     const email = e.target.elements.email.value;
     const password = e.target.elements.password.value;
 
-
-    // Inicia sesión con Firebase Authentication.
     try {
-      await signInWithEmailAndPassword(auth, email, password); // Obtiene el UID del usuario autenticado.
-      const userId = auth.currentUser.uid;  // Referencia al documento del usuario en Firestore.
-      const docRef = doc(firestore, `users/${userId}`); // Obtiene el documento del usuario.
-      const docSnap = await getDoc(docRef);
+      // Iniciar sesión con Firebase Authentication.
+      await signInWithEmailAndPassword(auth, email, password); 
+      const userId = auth.currentUser.uid; // Obtener el UID del usuario autenticado.
+      const docRef = doc(firestore, `users/${userId}`); // Referencia al documento del usuario en Firestore.
+      const docSnap = await getDoc(docRef); // Obtener el documento del usuario.
 
       if (docSnap.exists()) {
-        const userDoc = docSnap.data(); // Obtiene los datos del documento.
-        const role = userDoc.role; // Obtiene el rol del usuario.
+        const userDoc = docSnap.data(); // Obtener los datos del usuario.
+        const role = userDoc.role; // Obtener el rol del usuario.
 
-        if (role === "admin") {
-          navigate("/users");
-        } else {
-          navigate(`/training/${userId}`);
+        // Redirigir según el rol
+        if (role === "trabajador") {
+          navigate(`/worker-training/${userId}`); // Redirigir al trabajador a su vista
+        } else if (role === "supervisor" || role === "prevencionista") {
+          navigate(`/training/${userId}`); // Redirigir a supervisor o prevencionista
+        } else if (role === "admin") {
+          navigate("/users"); // Redirigir al administrador
         }
 
         Swal.fire({
@@ -49,18 +44,12 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Usuario no encontrado",
-          text: "Por favor, verifique sus credenciales",
-        });
       }
     } catch (error) {
       Swal.fire({
         icon: "error",
         title: "Error al iniciar sesión",
-        text: error.message,
+        text: "Revisa tu email y contraseña e inténtalo nuevamente.",
       });
     }
   };

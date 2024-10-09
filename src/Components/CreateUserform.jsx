@@ -187,7 +187,7 @@ const CreateUserForm = () => {
             </div>
 
             <div className="mb-3">
-              <label className="form-label">DNI/RUT</label>
+              <label className="form-label">RUT</label>
               <input
                 type="text"
                 className="form-control"
