@@ -28,7 +28,17 @@ const CreateUserForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const admin = auth.currentUser; // Obtener la cuenta del admin actual
+    // Validar que todos los campos estén llenos
+    if (!userName || !lastName || !email || !password || !dni || !country || !phone || !role) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Todos los campos son obligatorios. Por favor, complétalos.',
+      });
+      return;
+    }
+
+    const admin = auth.currentUser;
     if (!admin) {
       Swal.fire({
         icon: 'error',
@@ -38,12 +48,25 @@ const CreateUserForm = () => {
       return;
     }
 
-    // Guardar las credenciales del administrador para reautenticación posterior
+    // Solicitar la contraseña del administrador para la verificación
     const adminEmail = admin.email;
     const adminPassword = window.prompt("Introduce la contraseña del administrador para continuar:");
-    const adminCredential = EmailAuthProvider.credential(adminEmail, adminPassword);
+
+    // Si la contraseña del administrador no se ingresa, no se procede
+    if (!adminPassword) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Es necesario ingresar la contraseña del administrador para continuar.',
+      });
+      return;
+    }
 
     try {
+      // Verificar la autenticación del administrador
+      const adminCredential = EmailAuthProvider.credential(adminEmail, adminPassword);
+      await reauthenticateWithCredential(admin, adminCredential);
+
       // Crear el nuevo usuario
       const { user } = await createUserWithEmailAndPassword(auth, email, password);
 
@@ -72,7 +95,7 @@ const CreateUserForm = () => {
       await signInWithEmailAndPassword(auth, adminEmail, adminPassword);
 
       // Redirigir a la vista de usuarios
-      navigate('/users'); // Cambia '/users' por la ruta correspondiente a la vista de administración de usuarios
+      navigate('/users');
 
       // Limpiar los campos
       setUserName('');
@@ -107,10 +130,13 @@ const CreateUserForm = () => {
                 className="form-control"
                 value={userName}
                 onChange={handleInputChange(setUserName, (value) => /^[a-zA-ZáéíóúÁÉÍÓÚ ]*$/.test(value))}
-                placeholder="Ingrese nombre:"
+                placeholder="Ingrese nombre (solo letras)"
+                pattern="[a-zA-ZáéíóúÁÉÍÓÚ ]+"
+                title="El nombre solo debe contener letras."
                 required
               />
             </div>
+
             <div className="mb-3">
               <label className="form-label">Apellido</label>
               <input
@@ -118,10 +144,13 @@ const CreateUserForm = () => {
                 className="form-control"
                 value={lastName}
                 onChange={handleInputChange(setLastName, (value) => /^[a-zA-ZáéíóúÁÉÍÓÚ ]*$/.test(value))}
-                placeholder="Ingrese apellido:"
+                placeholder="Ingrese apellido (solo letras)"
+                pattern="[a-zA-ZáéíóúÁÉÍÓÚ ]+"
+                title="El apellido solo debe contener letras."
                 required
               />
             </div>
+
             <div className="mb-3">
               <label className="form-label">Email</label>
               <input
@@ -129,10 +158,11 @@ const CreateUserForm = () => {
                 className="form-control"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Ingrese correo electrónico:"
+                placeholder="Ingrese correo electrónico"
                 required
               />
             </div>
+
             <div className="mb-3">
               <label className="form-label">Contraseña</label>
               <input
@@ -140,10 +170,11 @@ const CreateUserForm = () => {
                 className="form-control"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Ingrese contraseña:"
+                placeholder="Ingrese contraseña"
                 required
               />
             </div>
+
             <div className="mb-3">
               <label className="form-label">Dirección</label>
               <input
@@ -151,19 +182,24 @@ const CreateUserForm = () => {
                 className="form-control"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                placeholder="Ingrese dirección:"
+                placeholder="Ingrese dirección"
               />
             </div>
+
             <div className="mb-3">
-              <label className="form-label">RUT</label>
+              <label className="form-label">DNI/RUT</label>
               <input
                 type="text"
                 className="form-control"
                 value={dni}
                 onChange={handleInputChange(setDni, (value) => /^[0-9.-]*$/.test(value))}
-                placeholder="Ingrese RUT (ej: 12.345.678-9):"
+                placeholder="Ingrese RUT (ej: 12.345.678-9)"
+                pattern="[0-9.-]+"
+                title="El RUT solo debe contener números, puntos y guiones."
+                required
               />
             </div>
+
             <div className="mb-3">
               <label className="form-label">País</label>
               <input
@@ -171,9 +207,13 @@ const CreateUserForm = () => {
                 className="form-control"
                 value={country}
                 onChange={handleInputChange(setCountry, (value) => /^[a-zA-ZáéíóúÁÉÍÓÚ ]*$/.test(value))}
-                placeholder="Ingrese país:"
+                placeholder="Ingrese país (solo letras)"
+                pattern="[a-zA-ZáéíóúÁÉÍÓÚ ]+"
+                title="El país solo debe contener letras."
+                required
               />
             </div>
+
             <div className="mb-3">
               <label className="form-label">Teléfono</label>
               <input
@@ -181,9 +221,13 @@ const CreateUserForm = () => {
                 className="form-control"
                 value={phone}
                 onChange={handleInputChange(setPhone, (value) => /^[0-9]*$/.test(value))}
-                placeholder="Ingrese número de teléfono:"
+                placeholder="Ingrese número de teléfono (solo números)"
+                pattern="[0-9]+"
+                title="El número de teléfono solo debe contener números."
+                required
               />
             </div>
+
             <div className="mb-3">
               <label className="form-label">Rol</label>
               <select
@@ -193,7 +237,7 @@ const CreateUserForm = () => {
                 required
               >
                 <option value="" disabled>
-                  Seleccione un Rol
+                  Seleccione un rol
                 </option>
                 <option value="trabajador">Prevencionista de riesgo</option>
                 <option value="supervisor">Supervisor</option>
