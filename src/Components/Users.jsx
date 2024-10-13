@@ -81,6 +81,7 @@ const Users = () => {
                   <th scope="col">Rut</th>
                   <th scope="col">Pais</th>
                   <th scope="col">Telefono</th>
+                  <th scope="col">Rol</th>
                   <th scope="col">Editar</th>
                   <th scope="col">Borrar</th>
                 </tr>
@@ -94,6 +95,7 @@ const Users = () => {
                     <td>{user.dni}</td>
                     <td>{user.country}</td>
                     <td>{user.phone}</td>
+                    <td>{user.role}</td>
                     <td>
                       <Link to={`/edit/${user.id}`} className="btn btn-success">
                         <i className="fa-solid fa-pen-to-square"></i>
