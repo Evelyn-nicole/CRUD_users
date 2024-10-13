@@ -55,8 +55,7 @@ const WorkerTraining = () => {
               Country: {capitalizeFirstLetter(user.country)}
             </p>
             <p className="card-text">Phone: {user.phone}</p>
-            {/* Aquí puedes agregar funcionalidades específicas para el trabajador */}
-            <p className="card-text">Este es el panel del trabajador.</p>
+            <p className="card-text">Rol: {capitalizeFirstLetter(user.role)}</p>
           </div>
         </div>
       </div>

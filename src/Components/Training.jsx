@@ -66,6 +66,7 @@ const Training = () => {
               Country: {capitalizeFirstLetter(user.country)}
             </p>
             <p className="card-text">Phone: {user.phone}</p>
+            <p className="card-text">Rol: {capitalizeFirstLetter(user.role)}</p>
             <Link to={`/create-training/${userId}`} className="btn btn-primary">
               Crear Capacitación
             </Link>
