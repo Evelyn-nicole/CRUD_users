@@ -12,6 +12,9 @@ const AccidentList = () => {
 
   // Función para capitalizar la primera letra de una cadena
   const capitalizeFirstLetter = (string) => {
+    if (typeof string !== 'string' || !string) {
+      return '';  // Devuelve una cadena vacía si el valor no es válido
+    }
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   };
 
@@ -117,7 +120,6 @@ const AccidentList = () => {
 
   return (
     <>
-      {/* Título fuera del cuadro */}
       <h2 className="accident-list-title mb-4">Listado de Accidentes Registrados</h2>
 
       <div className="accident-list-container">
@@ -132,7 +134,7 @@ const AccidentList = () => {
                 <th>Acciones Correctivas</th>
                 <th>Estado</th>
                 <th>Responsable</th>
-                <th>Cargo del Responsable</th> {/* Cargo del responsable */}
+                <th>Cargo del Responsable</th>
                 <th>Nombre del Accidentado</th>
                 <th>Apellido del Accidentado</th>
                 <th>Cargo</th>
@@ -151,14 +153,13 @@ const AccidentList = () => {
                   <td>{capitalizeFirstLetter(accident.correctiveActions)}</td>
                   <td>{capitalizeFirstLetter(accident.status)}</td>
                   <td>{accident.responsable}</td>
-                  <td>{accident.responsablePosition}</td> {/* Mostrar cargo del responsable */}
+                  <td>{accident.responsablePosition}</td>
                   <td>{capitalizeFirstLetter(accident.employeeName)}</td>
                   <td>{capitalizeFirstLetter(accident.employeeLastName)}</td>
                   <td>{capitalizeFirstLetter(accident.employeePosition)}</td>
                   <td>{accident.employeeAge}</td>
                   <td>{accident.employeeRut}</td>
                   <td>
-                    {/* Contenedor de botones organizados en una fila */}
                     <div className="accident-button-group">
                       <button 
                         className="btn-accident-primary btn-sm mb-1" 
@@ -192,7 +193,6 @@ const AccidentList = () => {
           </table>
         </div>
 
-        {/* Botón de enlace para volver a la vista de capacitación */}
         <Link className="btn-accident-back mt-3" to={`/training/${userId}`}>
           Volver
         </Link>

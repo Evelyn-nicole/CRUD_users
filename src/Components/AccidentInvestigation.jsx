@@ -60,6 +60,9 @@ const AccidentInvestigation = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("User ID al crear accidente:", userId); // Depurar userId
+    console.log("Detalles del accidente que se va a registrar:", accidentDetails); // Depurar detalles
+
     try {
       // Crear un nuevo registro en la colección raíz de 'accident_investigations' con el userId
       await addDoc(collection(db, "accident_investigations"), {
