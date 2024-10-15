@@ -111,6 +111,14 @@ body {
     margin-bottom: 20px; 
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Sombra para mejorar el contraste */
   }
+  .training-list-title {
+    font-size: 32px; 
+    font-weight: bold;
+    color: #ffffff; 
+    text-align: center; 
+    margin-bottom: 20px; 
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Sombra para mejorar el contraste */
+  }
   
   /* Form styles */
   .login-page form {
@@ -137,12 +145,18 @@ body {
   .login-page .btn-sesion {
     background-color: #007bff; /* Azul tipo Bootstrap primary */
     color: #ffffff;
+  .login-page .btn-sesion {
+    background-color: #007bff; /* Azul tipo Bootstrap primary */
+    color: #ffffff;
     border-radius: 30px;
     padding: 10px;
     border: none;
     transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease;
   }
   
+  .login-page .btn-sesion:hover {
+    background-color: #0056b3; /* Un tono más oscuro en hover */
   .login-page .btn-sesion:hover {
     background-color: #0056b3; /* Un tono más oscuro en hover */
   }
@@ -155,10 +169,12 @@ body {
   /* Link styles */
   .login-page a {
     color: #ff9800;
+    color: #ff9800;
     text-decoration: none;
   }
   
   .login-page a:hover {
+    color: #e67e22; /* Un color más oscuro al hacer hover */
     color: #e67e22; /* Un color más oscuro al hacer hover */
     text-decoration: underline;
   }
@@ -286,7 +302,13 @@ body {
 }
 
 /* Estilos para el footer con degradado */
+/* Estilos para el footer con degradado */
 .footer {
+  background: linear-gradient(180deg, #2c3e50, #000000); /* Degradado vertical */
+  border-top: 2px solid #ff9800; /* Línea de borde naranja en la parte superior */
+  border-top-left-radius: 10px; /* Borde redondeado solo en la parte superior izquierda */
+  border-top-right-radius: 10px; /* Borde redondeado solo en la parte superior derecha */
+  padding: 20px; /* Añadir un poco de espacio */
   background: linear-gradient(180deg, #2c3e50, #000000); /* Degradado vertical */
   border-top: 2px solid #ff9800; /* Línea de borde naranja en la parte superior */
   border-top-left-radius: 10px; /* Borde redondeado solo en la parte superior izquierda */
@@ -314,11 +336,31 @@ body {
   padding: 5px 0;
   color: #f1f1f1; /* Texto gris claro */
   font-size: 14px;
+  color: #ffffff; /* Texto blanco */
+}
+
+/* Enlaces del footer */
+.footer a {
+  color: #ff9800; /* Naranja brillante para los enlaces */
+  text-decoration: none;
+  transition: color 0.3s ease; /* Transición suave para hover */
+}
+
+/* Enlaces del footer al pasar el mouse */
+.footer a:hover {
+  color: #ffb74d; /* Naranja más claro en hover */
+}
+
+/* Ajustes para el texto del footer */
+.footer p {
+  margin: 0;
+  padding: 5px 0;
+  color: #f1f1f1; /* Texto gris claro */
+  font-size: 14px;
 }
 
 
 /**********************************************************************/
-
 
 /* STYLES HOME */
 .home-container{
@@ -329,6 +371,7 @@ body {
   /* background: rgba(241, 236, 236, 0.242);  */
   padding: 2rem;
   border-radius: 0.8rem;
+  border-radius: 0.8rem;
 }
 
 .text-shadow {
@@ -336,6 +379,7 @@ body {
 }
 
 .home-card {
+  background: rgba(98, 90, 217, 0.229); /* Fondo semi-transparente */
   background: rgba(98, 90, 217, 0.229); /* Fondo semi-transparente */
   border: none; 
   border: 4px solid #cccdd330; /* Bordes sutiles */
@@ -398,6 +442,7 @@ body {
 /**********************************************************************/
 
 /* CREATE TRAINING*/
+
 
 .create-training {
   max-width: 600px;
@@ -483,6 +528,7 @@ body {
 .editTraining .btn {
   margin-top: 10px;
 }
+
 
 
 /**********************************************************************/
