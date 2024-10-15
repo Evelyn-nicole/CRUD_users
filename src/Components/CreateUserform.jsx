@@ -106,7 +106,7 @@ const CreateUserForm = () => {
       setDni('');
       setCountry('');
       setPhone('');
-      setRole('trabajador');
+      setRole('');
     } catch (error) {
       console.error('Error al crear el usuario o reautenticar al administrador:', error);
       Swal.fire({
