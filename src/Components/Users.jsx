@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../FireBaseConfig/FireBase";
 import Swal from "sweetalert2";
+import '../Styles/Users.css'; 
 
 
 

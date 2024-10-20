@@ -3,7 +3,7 @@ import { doc, getDoc, updateDoc } from "firebase/firestore"; // Firestore
 import { db } from "../FireBaseConfig/FireBase"; // Configuración de Firebase
 import { useNavigate, useParams, Link } from "react-router-dom"; // Navegación en React Router  useParams para obtener parámetros de la URL.
 import Swal from "sweetalert2"; 
-import "../styles.css"; 
+import "../Styles/Edit.css"; 
 
 
 const Edit = () => {

@@ -1,0 +1,71 @@
+/* Styles ACCIDENT INVESTIGATION */
+.accident-investigation {
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.8); 
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 40px auto;
+    max-width: 900px;
+  }
+  
+  .accident-investigation h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  .accident-investigation .form-label {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .accident-investigation .form-control {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .accident-investigation .btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .accident-investigation .btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Estilo para el botón rojo en su estado normal */
+  .accident-investigation .btn-red {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Estilo para el botón rojo cuando se pasa el ratón (hover) */
+  .accident-investigation .btn-red:hover {
+    background-color: darkred;
+    color: white;
+  }
+  
+  .section-title h3 {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  @media (max-width: 768px) {
+    .accident-investigation {
+      padding: 20px;
+      max-width: 100%;
+    }
+  }
+  

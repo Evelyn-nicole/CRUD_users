@@ -1,0 +1,37 @@
+/* CREATE TRAINING*/
+
+.create-training {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f9f9f9d5;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .create-training .card-header {
+    background-color: #0b54a1; 
+    color: white; 
+    padding: 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    
+  }
+  
+  .create-training h3 {
+    margin: 0;
+  }
+  
+  .create-training .card-body {
+    padding: 20px;
+  }
+  
+  .create-training .form-label {
+    font-weight: bold;
+  }
+  
+  
+  .create-training .btn-primary .btn-danger {
+    margin-top: 10px;
+  }
+  

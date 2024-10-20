@@ -1,0 +1,56 @@
+/* Estilos para el navbar */
+.navbar {
+    background: linear-gradient(180deg, #2c3e50, #000000); /* Degradado vertical */
+    border-bottom: 2px solid #ff9800; /* Línea de borde naranja */
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 10px; /* Añadir un poco de espacio alrededor */
+  }
+  
+  /* Transición suave para los enlaces */
+  .navbar a {
+    color: #ffffff; 
+    font-size: 16px;
+    padding: 10px 15px;
+    text-decoration: none;
+    transition: color 0.3s ease; /* Transición suave para hover */
+  }
+  
+  /* Cambia color de los enlaces al hacer hover */
+  .navbar a:hover {
+    color: #ff9800; 
+  }
+  
+  /* Logo normal */
+  .navbar-brand img {
+    height: 50px; /* Tamaño del logo por defecto */
+    transition: transform 0.4s ease; /* Transición suave para agrandar */
+  }
+  
+  /* Logo agrandado al hacer hover */
+  .navbar-brand img:hover {
+    transform: scale(1.2); /* Agranda el logo en un 20% */
+  }
+  
+  /* Botón del menú en móviles */
+  .navbar-toggler {
+    border-color: #ffffff; /* Color del botón de menú en móviles */
+  }
+  
+  /* Estilos para el nombre de usuario */
+  .navbar .rounded-pill {
+    background-color: #ff9800; /* Fondo naranja para el nombre de usuario */
+    padding: 5px 10px;
+  }
+  
+  /* Estilos para el botón de cerrar sesión */
+  .navbar .rounded-pill button {
+    background-color: #e74c3c; /* Botón de cerrar sesión rojo */
+    border: none;
+    transition: background-color 0.3s ease; /* Transición suave para hover */
+  }
+  
+  .navbar .rounded-pill button:hover {
+    background-color: #c0392b; /* Rojo más oscuro en hover */
+  }
+  

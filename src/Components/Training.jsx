@@ -3,6 +3,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../FireBaseConfig/FireBase";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import imagePerfil from "../assets/perfil.png";
+import '../Styles/Training.css'; 
 
 const Training = () => {
   const { id: userId } = useParams(); // Obtén el userId de los parámetros de la URL

@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../FireBaseConfig/FireBase";
 import Swal from "sweetalert2";
-import '../styles.css'; 
+import '../Styles/EditTraining.css'; 
 
 
 const EditTraining = () => {

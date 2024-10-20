@@ -3,7 +3,7 @@ import { db } from '../FireBaseConfig/FireBase';
 import { collection, getDocs, query, where, doc, updateDoc } from 'firebase/firestore';
 import { useParams, Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import '../styles.css';
+import '../Styles/AccidentList.css';
 
 const AccidentList = () => {
   const { id: userId } = useParams();

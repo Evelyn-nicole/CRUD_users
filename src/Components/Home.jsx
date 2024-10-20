@@ -4,6 +4,7 @@ import epp from '../assets/epp.png'
 import acc from '../assets/investigacioACC1.webp'
 import miper from '../assets/miper1.png'
 import docu from '../assets/login.jpg'
+import '../Styles/Home.css'; 
 
 
 const Home = () => {

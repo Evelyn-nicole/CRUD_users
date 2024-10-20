@@ -5,7 +5,7 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Swal from "sweetalert2"; // SweetAlert para alertas
 import { collection } from "firebase/firestore";
-import '../styles.css'; // Importar el archivo CSS
+import '../Styles/CreateTraining.css';
 
 const CreateTraining = () => {
   const [title, setTitle] = useState("");
@@ -35,6 +35,7 @@ const CreateTraining = () => {
       location,
       capacity,
       updated_at: new Date().toISOString(),
+      enrolledUsers: [] // Agregar el campo como un array vacío al crear la capacitación
     };
     
     try {

@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom"; // Importa hooks y compone
 import { app } from "../FireBaseConfig/FireBase"; // Importa la configuración de Firebase.
 import { doc, getDoc, getFirestore } from "firebase/firestore"; // Importa funciones de Firestore.
 import Swal from "sweetalert2";
+import '../Styles/Login.css'; 
 
 // Inicializa Firestore con la configuración de Firebase (app). Lo asigna a la variable firestore.
 const firestore = getFirestore(app);

@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth, re
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import '../Styles/CreateUserform.css';
 
 const CreateUserForm = () => {
   const [userName, setUserName] = useState('');

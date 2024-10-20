@@ -3,7 +3,7 @@ import { db } from '../FireBaseConfig/FireBase'; // Importar Firestore
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { doc, getDoc, collection, addDoc } from 'firebase/firestore';
 import Swal from 'sweetalert2';
-import '../styles.css';
+import '../Styles/AccidentInvestigation.css';
 
 const AccidentInvestigation = () => {
   const { id: userId } = useParams(); // Obtener el userId de la URL

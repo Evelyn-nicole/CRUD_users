@@ -1,0 +1,128 @@
+/* Estilo WIEW TRAINING */
+.training-list-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Mejora de la tarjeta de detalles */
+  .training-detail-card {
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .training-detail-card .card-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+  }
+  
+  .training-detail-card .card-body p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    word-break: break-word;
+  }
+  
+  /* Organización de las filas en los detalles */
+  .training-detail-card .row {
+    margin-bottom: 15px;
+  }
+  
+  /* Distribución de contenido en columnas */
+  .training-detail-card .col-md-6 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  /* Cuadro de Descripción Independiente */
+  .description-box {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .description-box h5 {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .description-box p {
+    margin: 0;
+    text-align: justify;
+  }
+  
+  /* Sección de lista de trabajadores */
+  .enrolled-users-list {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  .enrolled-users-list .list-group-item {
+    font-size: 16px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+  }
+  
+  .table-bordered {
+    border: 1px solid #ddd;
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Título de sección */
+  .section-title {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #050505;
+  }
+  
+  /* Contenedor para la tabla */
+  .training-table-container {
+    overflow-x: auto;
+    padding: 15px;
+  }
+  
+  /* Estilo para la tabla de capacitaciones */
+  .table {
+    width: 100%;
+    margin: auto;
+    max-width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table thead th {
+    text-align: center;
+    background-color: #343a40;
+    color: white;
+  }
+  
+  .table tbody tr td {
+    text-align: center;
+  }
+  
+  /* Estilo para el botón "Volver" */
+  .btn-danger {
+    background-color: #d9534f;
+    color: #fff;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c9302c;
+  }
+  
+  

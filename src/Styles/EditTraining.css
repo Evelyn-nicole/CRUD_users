@@ -1,0 +1,35 @@
+
+/*STYLES EDITAR CAPACITACION*/
+.editTraining {
+    max-width: 700px;
+    border: 2px solid #007bff;
+    border-radius: 15px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    padding: 20px; 
+    background-color: #f8f9fa; 
+  }
+  
+  .editTraining .card-header {
+    background-color: #007bff; 
+    color: #fff; 
+    text-align: center; 
+    font-weight: bold; 
+  }
+  
+  .editTraining .card-body {
+    padding: 20px; 
+  }
+  
+  .editTraining .form-label {
+    font-weight: bold; 
+  }
+  
+  .editTraining .form-control {
+    border-radius: 10px; /* Esquinas redondeadas para los campos de entrada */
+  }
+  
+  .editTraining .btn {
+    margin-top: 10px;
+  }
+  
+  
