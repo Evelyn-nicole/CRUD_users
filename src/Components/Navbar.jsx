@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from '../assets/logoCental.png'; // Ajusta la ruta según tu estructura de proyecto
+import logo from '../assets/logoCental.png'; 
 import { getAuth, signOut } from "firebase/auth";
 import Swal from "sweetalert2";
 import "../Styles/Navbar.css";
@@ -45,11 +45,15 @@ const Navbar = ({ user, getUser }) => {
                 HOME
               </Link>
             </li>
-            <li className="nav-item m-2 mt-3">
-              <Link className="text-white" to={"/login"}>
-                LOG IN
-              </Link>
-            </li>
+
+            {/* Mostrar "LOG IN" solo si no hay usuario logueado */}
+            {!user && (
+              <li className="nav-item m-2 mt-3">
+                <Link className="text-white" to={"/login"}>
+                  LOG IN
+                </Link>
+              </li>
+            )}
 
             {/* Condicional para administradores */}
             {user !== null && getUser && getUser.role === "admin" && (

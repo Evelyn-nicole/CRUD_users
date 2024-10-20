@@ -8,9 +8,10 @@ import '../Styles/AccidentList.css';
 const AccidentList = () => {
   const { id: userId } = useParams();
   const [accidents, setAccidents] = useState([]);
+  const [selectedAccidentId, setSelectedAccidentId] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const capitalizeFirstLetter = (string = '') => 
+  const capitalizeFirstLetter = (string = '') =>
     string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 
   useEffect(() => {
@@ -98,8 +99,12 @@ const AccidentList = () => {
     }
   };
 
-  if (isLoading) return <div>Cargando accidentes...</div>;
-  if (!accidents.length) return <div>No se encontraron accidentes registrados.</div>;
+  const toggleAccidentDetails = (accidentId) => {
+    setSelectedAccidentId(prevId => (prevId === accidentId ? null : accidentId));
+  };
+
+  if (isLoading) return <div className="loading">Cargando accidentes...</div>;
+  if (!accidents.length) return <div className="no-data">No se encontraron accidentes registrados.</div>;
 
   return (
     <>
@@ -112,44 +117,81 @@ const AccidentList = () => {
                 <th>Fecha</th>
                 <th>Hora</th>
                 <th>Ubicación</th>
-                <th>Descripción</th>
-                <th>Acciones Correctivas</th>
                 <th>Estado</th>
-                <th>Responsable</th>
-                <th>Cargo del Responsable</th>
-                <th>Nombre del Accidentado</th>
-                <th>Apellido del Accidentado</th>
-                <th>Cargo</th>
-                <th>Edad</th>
-                <th>RUT</th>
                 <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
               {accidents.map(accident => (
-                <tr key={accident.id}>
-                  <td>{accident.date}</td>
-                  <td>{accident.time}</td>
-                  <td className="location-column">{capitalizeFirstLetter(accident.location)}</td>
-                  <td>{capitalizeFirstLetter(accident.description)}</td>
-                  <td>{capitalizeFirstLetter(accident.correctiveActions)}</td>
-                  <td>{capitalizeFirstLetter(accident.status)}</td>
-                  <td>{accident.responsable}</td>
-                  <td>{accident.responsablePosition}</td>
-                  <td>{capitalizeFirstLetter(accident.employeeName)}</td>
-                  <td>{capitalizeFirstLetter(accident.employeeLastName)}</td>
-                  <td>{capitalizeFirstLetter(accident.employeePosition)}</td>
-                  <td>{accident.employeeAge}</td>
-                  <td>{accident.employeeRut}</td>
-                  <td>
-                    <div className="accident-button-group">
-                      <button className="btn-accident-primary btn-sm mb-1" onClick={() => updateAccidentStatus(accident.id, 'En Proceso')}>En Proceso</button>
-                      <button className="btn-accident-danger btn-sm mb-1" onClick={() => updateAccidentStatus(accident.id, 'Pendiente')}>Pendiente</button>
-                      <button className="btn-accident-success btn-sm mb-1" onClick={() => updateAccidentStatus(accident.id, 'Cerrada')}>Cerrada</button>
-                      <button className="btn-accident-add-corrective btn-sm" onClick={() => addCorrectiveActions(accident.id)}>Agregar Acciones</button>
-                    </div>
-                  </td>
-                </tr>
+                <React.Fragment key={accident.id}>
+                  <tr
+                    className={`accident-row ${selectedAccidentId === accident.id ? 'selected' : ''}`}
+                  >
+                    <td>{accident.date}</td>
+                    <td>{accident.time}</td>
+                    <td className="location-column">{capitalizeFirstLetter(accident.location)}</td>
+                    <td>{capitalizeFirstLetter(accident.status)}</td>
+                    <td>
+                      <div className="btn-group">
+                        <button
+                          className="btn btn-secondary btn-sm dropdown-toggle"
+                          type="button"
+                          id={`dropdown-${accident.id}`}
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        >
+                          Opciones
+                        </button>
+                        <ul className="dropdown-menu" aria-labelledby={`dropdown-${accident.id}`}>
+                          <li>
+                            <button className="dropdown-item" onClick={() => updateAccidentStatus(accident.id, 'En Proceso')}>En Proceso</button>
+                          </li>
+                          <li>
+                            <button className="dropdown-item" onClick={() => updateAccidentStatus(accident.id, 'Pendiente')}>Pendiente</button>
+                          </li>
+                          <li>
+                            <button className="dropdown-item" onClick={() => updateAccidentStatus(accident.id, 'Cerrada')}>Cerrada</button>
+                          </li>
+                        </ul>
+                      </div>
+                      <button className="btn btn-info btn-sm mx-1" onClick={() => addCorrectiveActions(accident.id)}>Acciones Correctivas</button>
+                      <button className="btn btn-warning btn-sm mx-1" onClick={() => toggleAccidentDetails(accident.id)}>Ver Detalles</button>
+                    </td>
+                  </tr>
+
+                  {selectedAccidentId === accident.id && (
+                    <tr className="accident-details-row">
+                      <td colSpan="6">
+                        <div className="accident-details">
+                          <h3 className="details-title">Detalles del Accidente</h3>
+                          <div className="details-content">
+                            <div className="details-column details-block">
+                              <h4 className="details-subtitle">Responsable</h4>
+                              <p><strong>Nombre:</strong> {accident.responsable}</p>
+                              <p><strong>Cargo:</strong> {accident.responsablePosition}</p>
+                            </div>
+                            <div className="details-column details-block">
+                              <h4 className="details-subtitle">Datos del Accidentado</h4>
+                              <p><strong>Nombre:</strong> {capitalizeFirstLetter(accident.employeeName)}</p>
+                              <p><strong>Apellido:</strong> {capitalizeFirstLetter(accident.employeeLastName)}</p>
+                              <p><strong>Cargo:</strong> {capitalizeFirstLetter(accident.employeePosition)}</p>
+                              <p><strong>Edad:</strong> {accident.employeeAge}</p>
+                              <p><strong>RUT:</strong> {accident.employeeRut}</p>
+                            </div>
+                          </div>
+                          <div className="details-block">
+                            <h4 className="details-subtitle">Descripción del Accidente</h4>
+                            <p>{capitalizeFirstLetter(accident.description)}</p>
+                          </div>
+                          <div className="details-block">
+                            <h4 className="details-subtitle">Acciones Correctivas</h4>
+                            <p className="corrective-actions">{accident.correctiveActions ? capitalizeFirstLetter(accident.correctiveActions) : 'No hay acciones correctivas registradas.'}</p>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </React.Fragment>
               ))}
             </tbody>
           </table>

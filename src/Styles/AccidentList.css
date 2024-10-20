@@ -1,106 +1,154 @@
-
 /* Estilos para AccidentList */
 .accident-list-container {
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.95);
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    max-width: 1200px;
-    margin: 0 auto;
-    overflow-x: auto;
-  }
-  
-  .accident-list-title {
-    font-size: 36px;
-    font-weight: bold;
-    color: #ffffff; /* Color más oscuro para el título */
-    text-align: center;
-    margin-bottom: 40px;
-    margin-top: 30px;
-    text-shadow: 2px 2px 2px rgb(0, 0, 0);
-  }
-  
-  .accident-list-table {
-    width: 100%;
-    margin-bottom: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-  }
-  
-  .accident-list-table th,
-  .accident-list-table td {
-    padding: 15px;
-    text-align: center;
-    vertical-align: middle;
-    white-space: nowrap;
-  }
-  
-  .accident-list-table .thead-dark {
-    background-color: #343a40;
-    color: #fff;
-  }
-  
-  .table-hover tbody tr:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-  }
-  
-  /* Botones mejorados y espaciados para AccidentList */
-  .btn-accident-primary,
-  .btn-accident-danger,
-  .btn-accident-success,
-  .btn-accident-add-corrective {
-    width: 80px; /* Botones más pequeños */
-    color: #fff;
-    border: none;
-    padding: 6px 10px; /* Reducir padding */
-    font-size: 12px; /* Reducir tamaño de texto */
-    border-radius: 4px;
-    cursor: pointer;
-    margin-bottom: 5px;
-    margin-right: 10px; /* Espacio entre botones */
-  }
-  
-  /* Estilo especial para el botón de medidas correctivas */
-  .btn-accident-add-corrective {
-    width: 120px; /* Hacerlo más largo */
-    font-size: 12px; /* Ajuste de tamaño de texto */
-    background-color: #0a26319c;
-  }
-  
-  .btn-accident-primary {
-    background-color: #007bff;
-  }
-  
-  .btn-accident-danger {
-    background-color: #ff0000;
-  }
-  
-  .btn-accident-success {
-    background-color: #28a745;
-  }
-  
-  .btn-accident-back {
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 4px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-  }
-  
-  .btn-accident-back:hover,
-  .btn-accident-primary:hover,
-  .btn-accident-danger:hover,
-  .btn-accident-success:hover,
-  .btn-accident-add-corrective:hover {
-    opacity: 0.8;
-  }
-  
-  /* Mejora del espaciado de la tabla */
-  .accident-list-table td {
-    padding: 15px 10px;
-  }
-  
-  
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+.accident-list-title {
+  font-size: 36px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 40px;
+  margin-top: 30px;
+  text-shadow: 2px 2px 2px rgb(0, 0, 0);
+}
+
+.accident-list-table {
+  width: 100%;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.accident-list-table th,
+.accident-list-table td {
+  padding: 15px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.accident-list-table .thead-dark {
+  background-color: #343a40;
+  color: #fff;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Botones mejorados y espaciados para AccidentList */
+.btn-accident-primary,
+.btn-accident-danger,
+.btn-accident-success,
+.btn-accident-add-corrective {
+  width: 80px;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 5px;
+  margin-right: 10px;
+}
+
+/* Estilo especial para el botón de medidas correctivas */
+.btn-accident-add-corrective {
+  width: 120px;
+  font-size: 12px;
+  background-color: #0a26319c;
+}
+
+.btn-accident-primary {
+  background-color: #007bff;
+}
+
+.btn-accident-danger {
+  background-color: #ff0000;
+}
+
+.btn-accident-success {
+  background-color: #28a745;
+}
+
+.btn-accident-back {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-accident-back:hover,
+.btn-accident-primary:hover,
+.btn-accident-danger:hover,
+.btn-accident-success:hover,
+.btn-accident-add-corrective:hover {
+  opacity: 0.8;
+}
+
+/* Mejora del espaciado de la tabla */
+.accident-list-table td {
+  padding: 15px 10px;
+}
+
+/* Estilos para los detalles del accidente */
+.accident-details {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.details-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.details-column {
+  flex: 1;
+  min-width: 250px;
+}
+
+.details-subtitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.corrective-actions {
+  margin-top: 10px;
+  font-style: italic;
+}
+
+.details-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.details-block {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-radius: 8px;
+}
+
+.details-block p {
+  margin: 0;
+}

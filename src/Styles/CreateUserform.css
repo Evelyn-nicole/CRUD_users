@@ -1,72 +1,123 @@
-/* styles.css CREATEUSER */
-.create-user-bg {
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    backdrop-filter: blur(2px) !important; 
-  }
-  
-  .create-user-form {
-    background-color: rgba(255, 255, 255, 0.8); /* Fondo transparente */
-    padding: 2rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .title-create-user{
-    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.9);
-  }
-
-  
-
-
-
-  /*CSS FORMULARIO CREACION DE USUARIO, Se ocupa el mismo css que el de editar usuario
-/* Centrar el formulario con Flexbox y agregar imagen de fondo */
+/* CREATE USER */
 .createUser {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Ocupa el 100% de la altura de la ventana */
-  background-image: url('src\assets\login20.png'); /* Ruta de la imagen de fondo */
-  background-size: cover; /* Asegura que la imagen cubra todo el fondo */
-  background-position: center;
-  background-repeat: no-repeat;
+  min-height: 100vh; /* Full height of the viewport */
 }
 
-/* Mantener el estilo del formulario */
+/* Card styles */
 .createUser .card {
-  max-width: 600px;
+  max-width: 800px; /* Aumentar el ancho máximo para pantallas grandes */
   width: 100%;
   border: 2px solid #007bff;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
   padding: 20px;
-  background-color: rgba(248, 249, 250, 0.9); /* Fondo claro y transparente para el formulario */
+  background-color: rgba(248, 249, 250, 0.95);
 }
 
+/* Header styling */
 .createUser .card-header {
   background-color: #007bff;
   color: #fff;
   text-align: center;
   font-weight: bold;
+  font-size: 1.5rem;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  padding: 15px;
 }
 
+/* Body padding for better spacing */
 .createUser .card-body {
-  padding: 20px;
+  padding: 25px;
 }
 
+/* Form label styling */
 .createUser .form-label {
   font-weight: bold;
+  margin-bottom: 5px;
 }
 
+/* Form control field styling */
 .createUser .form-control {
   border-radius: 10px;
   margin-bottom: 15px;
+  padding: 12px;
 }
 
+/* Button styling */
 .createUser .btn {
-  margin-top: 10px;
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 10px;
 }
 
+/* Responsive layout adjustments for larger screens */
+@media (min-width: 768px) {
+  .createUser .card-body form .row {
+    display: flex;
+    gap: 15px;
+  }
+
+  .createUser .card-body form .col-md-6 {
+    flex: 1; /* Make columns equal width */
+  }
+
+  .createUser .card-body form .col-md-12 {
+    flex: 2; /* Full-width for single-column fields */
+  }
+
+  .createUser .card-body form .form-group {
+    width: 100%;
+  }
+}
+
+/* Title style in the card for visual separation */
+.createUser .card-title {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+/* Hover effect for buttons */
+.btn-primary:hover {
+  background-color: #1364b6ce;
+}
+
+/* Style for responsiveness */
+@media (max-width: 768px) {
+  .createUser .card {
+    padding: 15px;
+  }
+
+  .createUser .form-control {
+    margin-bottom: 15px;
+  }
+
+  .createUser .btn {
+    padding: 10px;
+  }
+}
+
+/* Botón de estilo peligroso (rojo) sin fondo azul en hover */
+.btn-danger {
+  background-color: #b42c2c;
+  color: #fff;
+  border: none;
+  outline: none; /* Eliminar el contorno predeterminado */
+}
+
+/* Efecto al pasar el mouse */
+.btn-danger:hover {
+  background-color: #b80606; /* Un tono ligeramente más oscuro para el hover */
+  color: #fff;
+  border: none;
+}
