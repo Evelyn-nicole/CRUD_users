@@ -70,6 +70,7 @@ const Users = () => {
   return (
     <>
       <div className="container mt-5">
+      <h1 className="titulo-panel-admin mb-5">Panel Administrador</h1> 
         <div className="row">
           <div className="col-12">
             <div className="d-grid gap-2"></div>
