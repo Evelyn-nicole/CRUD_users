@@ -3,7 +3,7 @@ import { collection, getDocs, query, where, doc, deleteDoc, getDoc } from 'fireb
 import { db } from '../FireBaseConfig/FireBase';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import '../Styles/ViewTrainings.css'; 
+import '../Styles/ViewTrainings.css';
 
 const ViewTrainings = () => {
   const { id: userId } = useParams();
@@ -41,6 +41,10 @@ const ViewTrainings = () => {
     fetchUserTrainings();
   }, [userId]);
 
+  const handleEdit = (trainingId) => {
+    navigate(`/edit-training/${trainingId}`);
+  };
+
   const handleDelete = async (trainingId) => {
     Swal.fire({
       title: '¿Desea eliminar la capacitación?',
@@ -64,7 +68,6 @@ const ViewTrainings = () => {
 
   const handleViewDetails = async (training) => {
     setSelectedTraining(training);
-
     try {
       if (Array.isArray(training.enrolledUsers) && training.enrolledUsers.length > 0) {
         const enrolledUsersList = [];
@@ -83,7 +86,6 @@ const ViewTrainings = () => {
             console.error(`Error al obtener datos del usuario con ID ${enrolledUserId}:`, err);
           }
         }
-
         setEnrolledUsers(enrolledUsersList);
       } else {
         setEnrolledUsers([]);
