@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth, re
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import "../Styles/CreateUserform.css";
 
 const CreateUserForm = () => {
   const [userName, setUserName] = useState('');
@@ -123,109 +124,117 @@ const CreateUserForm = () => {
         <div className="card-header">Crear Usuario</div>
         <div className="card-body">
           <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label className="form-label">Nombre</label>
-              <input
-                type="text"
-                className="form-control"
-                value={userName}
-                onChange={handleInputChange(setUserName, (value) => /^[a-zA-ZáéíóúÁÉÍÓÚ ]*$/.test(value))}
-                placeholder="Ingrese nombre (solo letras)"
-                pattern="[a-zA-ZáéíóúÁÉÍÓÚ ]+"
-                title="El nombre solo debe contener letras."
-                required
-              />
+            <div className="row">
+              <div className="col-md-6 mb-3">
+                <label className="form-label">Nombre</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={userName}
+                  onChange={handleInputChange(setUserName, (value) => /^[a-zA-ZáéíóúÁÉÍÓÚ ]*$/.test(value))}
+                  placeholder="Ingrese nombre (solo letras)"
+                  pattern="[a-zA-ZáéíóúÁÉÍÓÚ ]+"
+                  title="El nombre solo debe contener letras."
+                  required
+                />
+              </div>
+
+              <div className="col-md-6 mb-3">
+                <label className="form-label">Apellido</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={lastName}
+                  onChange={handleInputChange(setLastName, (value) => /^[a-zA-ZáéíóúÁÉÍÓÚ ]*$/.test(value))}
+                  placeholder="Ingrese apellido (solo letras)"
+                  pattern="[a-zA-ZáéíóúÁÉÍÓÚ ]+"
+                  title="El apellido solo debe contener letras."
+                  required
+                />
+              </div>
             </div>
 
-            <div className="mb-3">
-              <label className="form-label">Apellido</label>
-              <input
-                type="text"
-                className="form-control"
-                value={lastName}
-                onChange={handleInputChange(setLastName, (value) => /^[a-zA-ZáéíóúÁÉÍÓÚ ]*$/.test(value))}
-                placeholder="Ingrese apellido (solo letras)"
-                pattern="[a-zA-ZáéíóúÁÉÍÓÚ ]+"
-                title="El apellido solo debe contener letras."
-                required
-              />
+            <div className="row">
+              <div className="col-md-6 mb-3">
+                <label className="form-label">Email</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Ingrese correo electrónico"
+                  required
+                />
+              </div>
+
+              <div className="col-md-6 mb-3">
+                <label className="form-label">Contraseña</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Ingrese contraseña"
+                  required
+                />
+              </div>
             </div>
 
-            <div className="mb-3">
-              <label className="form-label">Email</label>
-              <input
-                type="email"
-                className="form-control"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Ingrese correo electrónico"
-                required
-              />
+            <div className="row">
+              <div className="col-md-6 mb-3">
+                <label className="form-label">Dirección</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  placeholder="Ingrese dirección"
+                />
+              </div>
+
+              <div className="col-md-6 mb-3">
+                <label className="form-label">RUT</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={dni}
+                  onChange={handleInputChange(setDni, (value) => /^[0-9.-]*$/.test(value))}
+                  placeholder="Ingrese RUT (ej: 12.345.678-9)"
+                  pattern="[0-9.-]+"
+                  title="El RUT solo debe contener números, puntos y guiones."
+                  required
+                />
+              </div>
             </div>
 
-            <div className="mb-3">
-              <label className="form-label">Contraseña</label>
-              <input
-                type="password"
-                className="form-control"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Ingrese contraseña"
-                required
-              />
-            </div>
+            <div className="row">
+              <div className="col-md-6 mb-3">
+                <label className="form-label">País</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={country}
+                  onChange={handleInputChange(setCountry, (value) => /^[a-zA-ZáéíóúÁÉÍÓÚ ]*$/.test(value))}
+                  placeholder="Ingrese país (solo letras)"
+                  pattern="[a-zA-ZáéíóúÁÉÍÓÚ ]+"
+                  title="El país solo debe contener letras."
+                  required
+                />
+              </div>
 
-            <div className="mb-3">
-              <label className="form-label">Dirección</label>
-              <input
-                type="text"
-                className="form-control"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                placeholder="Ingrese dirección"
-              />
-            </div>
-
-            <div className="mb-3">
-              <label className="form-label">RUT</label>
-              <input
-                type="text"
-                className="form-control"
-                value={dni}
-                onChange={handleInputChange(setDni, (value) => /^[0-9.-]*$/.test(value))}
-                placeholder="Ingrese RUT (ej: 12.345.678-9)"
-                pattern="[0-9.-]+"
-                title="El RUT solo debe contener números, puntos y guiones."
-                required
-              />
-            </div>
-
-            <div className="mb-3">
-              <label className="form-label">País</label>
-              <input
-                type="text"
-                className="form-control"
-                value={country}
-                onChange={handleInputChange(setCountry, (value) => /^[a-zA-ZáéíóúÁÉÍÓÚ ]*$/.test(value))}
-                placeholder="Ingrese país (solo letras)"
-                pattern="[a-zA-ZáéíóúÁÉÍÓÚ ]+"
-                title="El país solo debe contener letras."
-                required
-              />
-            </div>
-
-            <div className="mb-3">
-              <label className="form-label">Teléfono</label>
-              <input
-                type="tel"
-                className="form-control"
-                value={phone}
-                onChange={handleInputChange(setPhone, (value) => /^[0-9]*$/.test(value))}
-                placeholder="Ingrese número de teléfono (solo números)"
-                pattern="[0-9]+"
-                title="El número de teléfono solo debe contener números."
-                required
-              />
+              <div className="col-md-6 mb-3">
+                <label className="form-label">Teléfono</label>
+                <input
+                  type="tel"
+                  className="form-control"
+                  value={phone}
+                  onChange={handleInputChange(setPhone, (value) => /^[0-9]*$/.test(value))}
+                  placeholder="Ingrese número de teléfono (solo números)"
+                  pattern="[0-9]+"
+                  title="El número de teléfono solo debe contener números."
+                  required
+                />
+              </div>
             </div>
 
             <div className="mb-3">
@@ -245,14 +254,20 @@ const CreateUserForm = () => {
               </select>
             </div>
 
+            <div className="d-flex justify-content-between">
             <button type="submit" className="btn btn-primary">
-              Crear Usuario
-            </button>
+                Crear Usuario
+              </button>
+              <button type="button" className="btn btn-danger" onClick={() => navigate(-1)}>
+                Cancelar
+              </button>
+            </div>
           </form>
         </div>
       </div>
     </div>
   );
+
 };
 
 export default CreateUserForm;
