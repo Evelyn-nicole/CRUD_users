@@ -20,6 +20,8 @@ import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 import AccidentInvestigation from './Components/AccidentInvestigation';
 import AccidentList from './Components/AccidentList';
+import CreateMiper from './Components/CreateMiper';
+import ViewMiper from './Components/ViewMiper';
 
 
 // Inicializa Firestore y Auth
@@ -72,6 +74,9 @@ const App = () => {
             <Route path="/view-accidents/:id" element={<AccidentList />} />
             <Route path="/edit-training/:trainingId" element={<EditTraining />} />
             <Route path="/edit/:id" element={<Edit />} />
+            <Route path="/create-miper/:id" element={<CreateMiper />} />
+            <Route path="/view-miper/:id" element={<ViewMiper />}
+            />
           </Routes>
         </div>
         <Footer />

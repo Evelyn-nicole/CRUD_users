@@ -68,23 +68,30 @@ const Training = () => {
             </p>
             <p className="card-text">Phone: {user.phone}</p>
             <p className="card-text">Rol: {capitalizeFirstLetter(user.role)}</p>
+
+            {/* Botones añadidos para la creación y visualización de Capacitaciones */}
             <Link to={`/create-training/${userId}`} className="btn btn-primary">
-              Crear Capacitación
+              Crear Registro Capacitación
             </Link>
-            <Link
-              to={`/view-trainings/${userId}`}
-              className="btn btn-secondary ms-2"
-            >
-              Listado de Capacitaciones
+            <Link to={`/view-trainings/${userId}`} className="btn btn-warning ms-2">
+              Ver Listado de Capacitaciones
             </Link>
 
             {/* Botones añadidos para la creación y visualización de accidentes */}
-            <Link to={`/accident-investigation/${userId}`} className="btn btn-warning ms-2">
+            <Link to={`/accident-investigation/${userId}`} className="btn btn-primary ms-2">
               Crear Registro de Accidentes
             </Link>
+            <Link to={`/view-accidents/${userId}`} className="btn btn-warning ms-2">
+              Ver Listado de Accidentes
+            </Link>
 
-            <Link to={`/view-accidents/${userId}`} className="btn btn-info ms-2">
-              Listado de Accidentes
+             {/* Botones añadidos para la creación y visualización de MIPER */}
+            <Link to={`/create-miper/${userId}`} className="btn btn-primary ms-2">
+              Crear Registro MIPER
+            </Link>
+
+            <Link to={`/view-miper/${userId}`} className="btn btn-warning ms-2">
+              Ver Listado de MIPER
             </Link>
           </div>
         </div>

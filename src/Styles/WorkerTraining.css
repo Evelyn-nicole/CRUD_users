@@ -1,7 +1,7 @@
 /*ESTILOS VISTA WORKERTraining*/
 
 .worker-background {
-    background-image: url('./assets/perfil-trabajador.jpg'); 
+    background-image: url('../assets/perfil-trabajador.jpg'); 
     background-size: cover; 
     background-position: center;
     min-height: 100vh; 
