@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from '../assets/logoCental.png'; 
+import logonav1 from '../assets/logonav1.png';
 import { getAuth, signOut } from "firebase/auth";
 import Swal from "sweetalert2";
 import "../Styles/Navbar.css";
@@ -25,7 +26,7 @@ const Navbar = ({ user, getUser }) => {
     <nav className="navbar bg-dark navbar-expand-lg bg-body-tertiary">
       <div className="container">
         <Link className="navbar-brand" to={"/"}>
-          <img src={logo} alt="SafeTRACK" style={{ height: "55px" }} />
+          <img src={logonav1} alt="SafeTRACK" style={{ height: "40px" }} />
         </Link>
         <button
           className="navbar-toggler"

@@ -34,6 +34,7 @@ const CreateMiper = () => {
 
     });
 
+    // obtencion de datos del usuario
     useEffect(() => {
         const fetchUser = async () => {
             try {
@@ -59,6 +60,7 @@ const CreateMiper = () => {
         }
     }, [userId]);
 
+    // manejo de cambios
     const handleChange = (e) => {
         const { name, value } = e.target;
         setMiperDetails({
@@ -71,6 +73,7 @@ const CreateMiper = () => {
         }
     };
 
+    //calculo del nivel de riesgo
     const calculateRiskLevel = (probability, severity) => {
         const prob = parseInt(probability) || 0;
         const sev = parseInt(severity) || 0;
@@ -93,6 +96,7 @@ const CreateMiper = () => {
                 riskColor = 'red';
             }
 
+            // actualizacion del estado
             setMiperDetails((prevDetails) => ({
                 ...prevDetails,
                 riskValue,
@@ -102,6 +106,7 @@ const CreateMiper = () => {
         }
     };
 
+    // envio del formulario
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
