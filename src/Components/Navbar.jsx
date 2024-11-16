@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from '../assets/logoCental.png'; 
 import logonav1 from '../assets/logonav1.png';
 import { getAuth, signOut } from "firebase/auth";
 import Swal from "sweetalert2";
