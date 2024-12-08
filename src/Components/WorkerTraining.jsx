@@ -115,8 +115,8 @@ const WorkerTraining = () => {
             {trainings.length > 0 ? (
               trainings.map((training) => (
                 <div key={training.id} className="worker-training-item">
-                  <h5 className="training-title">{training.title}</h5>
-                  <p className="training-description">{training.description}</p>
+                  <h5 className="training-title">{capitalizeFirstLetter(training.title)}</h5>
+                  <p className="training-description">{capitalizeFirstLetter(training.description)}</p>
                   <button
                     className={`enroll-button ${training.isEnrolled ? 'enrolled' : ''}`}
                     onClick={() => !training.isEnrolled && handleEnroll(training.id)}

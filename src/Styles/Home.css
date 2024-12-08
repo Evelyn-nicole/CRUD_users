@@ -1,11 +1,10 @@
 /* Fondo principal con imagen */
 
-/* Posicionamiento del título principal SafeTRACK */
-
 .hero-title:first-of-type {
-  font-size: 3rem;
-  font-weight: 700; /* Cambiado de 600 a 700 para hacerlo más negrita */
+  font-size: 70px;
+  font-weight: 600; /* Cambiado de 600 a 700 para hacerlo más negrita */
   margin-bottom: 2rem;
+  font-family: 'Playfair Display', serif;
 }
 
 
@@ -29,10 +28,12 @@
 }
 
 .hero-title {
-  font-size: 3rem;
+  font-size: 60px;
+  font-weight: bold;
   font-weight: 600;
   margin-bottom: 1rem;
   color: #072b4f; /* Azul profundo */
+  font-family: 'Playfair Display', serif;
   text-shadow: 
     -1px -1px 0 #ffffff, /* Sombra superior izquierda */
     1px -1px 0 #ffffff,  /* Sombra superior derecha */
@@ -45,22 +46,25 @@
   margin-bottom: 1.5rem;
   color: #555555; /* Gris suave */
   line-height: 1.6;
+  font-family: 'Playfair Display', serif;
 }
 
 .hero-button {
   background-color: #ffa726; /* Botón naranja cálido */
   color: #ffffff;
-  padding: 0.8rem 2rem;
+  padding: 15px 30px;
   border: none;
-  border-radius: 5px;
-  font-size: 1.0rem;
+  border-radius: 50px;
+  font-size: 18px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  font-family: 'Playfair Display', serif;
+
 }
 
 .hero-button:hover {
-  background-color: #b86721; /* Azul más intenso */
-  transform: scale(1.03); /* Pequeño efecto de ampliación */
+  background-color: #ea7211; /* Azul más intenso */
+  transform: scale(1.10); /* Pequeño efecto de ampliación */
 }
 
 /* Sección de características */
@@ -75,6 +79,7 @@
   margin-bottom: 2rem;
   color: #003366; /* Azul profundo */
   font-weight: 600;
+  font-family: 'Playfair Display', serif;
 }
 
 .features-grid {
@@ -104,6 +109,7 @@
   font-size: 1.3rem;
   margin-bottom: 0.8rem;
   color: #003366; /* Azul profundo */
+  font-family: 'Playfair Display', serif;
 }
 
 .feature p {

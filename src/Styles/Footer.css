@@ -2,10 +2,10 @@
 /* Estilos para el footer */
 .footer {
     background: linear-gradient(180deg, #2c3e50, #000000); /* Degradado vertical */
-    border-top: 2px solid #ff9800; /* Línea de borde naranja en la parte superior */
+    border-top: 4px solid #ff9800; /* Línea de borde naranja en la parte superior */
     border-top-left-radius: 10px; /* Borde redondeado solo en la parte superior izquierda */
     border-top-right-radius: 10px; /* Borde redondeado solo en la parte superior derecha */
-    padding: 20px; /* Añadir un poco de espacio */
+    padding: 40px; /* Añadir un poco de espacio */
     text-align: center;
     color: #ffffff; /* Texto blanco */
   }

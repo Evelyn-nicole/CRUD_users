@@ -6,28 +6,56 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import '../Styles/ViewMiper.css';
 
-const ViewMiper = () => {
+const ViewMiper = ({ user, getUser }) => {
     const { id: userId } = useParams();
     const [mipers, setMipers] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+
+    // useEffect(() => {
+    //     const fetchMipers = async () => {
+    //         try {
+    //             const mipersCollection = collection(db, 'mipers');
+    //             const q = query(mipersCollection, where('userId', '==', userId));
+    //             const mipersSnapshot = await getDocs(q);
+    //             const mipersList = mipersSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    //             setMipers(mipersList);
+    //         } catch (error) {
+    //             console.error('Error fetching MIPERs:', error);
+    //         } finally {
+    //             setIsLoading(false);
+    //         }
+    //     };
+
+    //     fetchMipers();
+    // }, [userId]);
 
     useEffect(() => {
         const fetchMipers = async () => {
             try {
                 const mipersCollection = collection(db, 'mipers');
-                const q = query(mipersCollection, where('userId', '==', userId));
+                let q;
+
+                if (getUser?.role === 'supervisor') {
+                    // Supervisores ven todos los registros
+                    q = query(mipersCollection);
+                } else if (getUser?.role === 'prevencionista') {
+                    // Prevencionistas ven solo sus propios registros
+                    q = query(mipersCollection, where('userId', '==', userId));
+                }
+
                 const mipersSnapshot = await getDocs(q);
                 const mipersList = mipersSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
                 setMipers(mipersList);
             } catch (error) {
-                console.error('Error fetching MIPERs:', error);
+                console.error('Error fetching MIPERs:', error.message);
             } finally {
                 setIsLoading(false);
             }
         };
 
         fetchMipers();
-    }, [userId]);
+    }, [userId, getUser]);
+
 
     const generatePDF = () => {
         const doc = new jsPDF('landscape'); // Configuramos en modo paisaje

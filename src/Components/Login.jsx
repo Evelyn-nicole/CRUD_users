@@ -58,16 +58,14 @@ const Login = () => {
   // Renderiza el formulario de inicio de sesión
   return (
     <>
-      <div className="title-login mt-5 mb-3">
-        <h1>INICIO DE SESION</h1>
-      </div>
       <div className="login-page">
-        <div className="login-background mt-5">
+        <div className="login-background">
           <div className="container">
             <div className="row justify-content-center">
               <div className="col-sm-12 col-md-10 col-lg-8 col-xl-6">
                 <div className="card login-style">
                   <div className="card-body">
+                  <h2 className="title-login mb-5">Login</h2>
                     <form onSubmit={submithandler} className="mx-4 px-4">
                       <div className="mb-5">
                         <label
@@ -102,16 +100,11 @@ const Login = () => {
                         Aceptar
                       </button>
                     </form>
-                    {/* <div className="text-center mt-3">
-                      <a href="#" className="text-white">
-                        Forgot password?
-                      </a>
-                    </div> */}
                     <div className="text-center mt-3">
-                      {/* <Link className="text-black" to={"/Create"}>
-                        ¿No tienes una cuenta? Registrate
-                      </Link> */}
-                    </div>
+                      <a href="#" className="text">
+                        ¿Problemas con tu cuenta?
+                      </a>
+                    </div> 
                   </div>
                 </div>
               </div>

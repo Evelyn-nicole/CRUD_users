@@ -1,12 +1,12 @@
 /* Estilos para el navbar */
 .navbar {
     background: linear-gradient(180deg, #2c3e50, #000000); /* Degradado vertical */
-    border-bottom: 2px solid #ff9800; /* Línea de borde naranja */
+    border-bottom: 4px solid #ff9800; /* Línea de borde naranja */
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     padding: 10px; /* Añadir un poco de espacio alrededor */
   }
-  
+
   /* Transición suave para los enlaces */
   .navbar a {
     color: #ffffff; 
@@ -14,6 +14,8 @@
     padding: 10px 15px;
     text-decoration: none;
     transition: color 0.3s ease; /* Transición suave para hover */
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
   }
   
   /* Cambia color de los enlaces al hacer hover */
@@ -24,12 +26,12 @@
   /* Logo normal */
   .navbar-brand img {
     height: 50px; /* Tamaño del logo por defecto */
-    transition: transform 0.4s ease; /* Transición suave para agrandar */
+    transition: transform 0.6s ease; /* Transición suave para agrandar */
   }
   
   /* Logo agrandado al hacer hover */
   .navbar-brand img:hover {
-    transform: scale(1.2); /* Agranda el logo en un 20% */
+    transform: scale(1.1); /* Agranda el logo en un 10% */
   }
   
   /* Botón del menú en móviles */
@@ -37,20 +39,66 @@
     border-color: #ffffff; /* Color del botón de menú en móviles */
   }
   
-  /* Estilos para el nombre de usuario */
-  .navbar .rounded-pill {
-    background-color: #ff9800; /* Fondo naranja para el nombre de usuario */
-    padding: 5px 10px;
+
+  .nav-item:hover {
+    transform: scale(1.10); /* Pequeño efecto de ampliación */
+    transition: transform 0.2s ease-in-out; /* Suaviza la animación */
   }
-  
-  /* Estilos para el botón de cerrar sesión */
-  .navbar .rounded-pill button {
-    background-color: #e74c3c; /* Botón de cerrar sesión rojo */
-    border: none;
-    transition: background-color 0.3s ease; /* Transición suave para hover */
-  }
-  
-  .navbar .rounded-pill button:hover {
-    background-color: #c0392b; /* Rojo más oscuro en hover */
-  }
-  
+
+
+/* Contenedor del nombre de usuario y botón */
+.user-session {
+  display: flex;
+  align-items: center; /* Centrar verticalmente */
+  justify-content: space-between; /* Espaciado entre los elementos */
+  background-color: #d88314bc; /* Fondo oscuro */
+  color: white; /* Texto claro */
+  border-radius: 30px; /* Bordes redondeados */
+  padding: 5px 15px; /* Espaciado interno */
+  gap: 10px; /* Espacio entre texto y botón */
+}
+
+/* Estilo del texto */
+.user-session span {
+  font-size: 14px; /* Tamaño legible pero discreto */
+  font-weight: bold;
+  font-family: 'Playfair Display', serif;
+  line-height: 1; /* Asegura alineación vertical */
+  margin: 0; /* Quita márgenes adicionales */
+}
+
+/* Botón de cerrar sesión */
+.user-session button {
+  display: flex;
+  align-items: center; /* Centrar el ícono dentro del botón */
+  justify-content: center;
+  background-color: #28a745; /* Verde por defecto */
+  border: none;
+  border-radius: 50%; /* Botón circular */
+  width: 30px; /* Tamaño del botón */
+  height: 30px;
+  cursor: pointer;
+  color: white; /* Ícono blanco */
+  padding: 0; /* Sin relleno adicional */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Transición suave */
+  margin: 0; /* Elimina márgenes adicionales */
+  vertical-align: middle; /* Asegura que se alinee correctamente */
+}
+
+.user-session button:hover {
+  background-color: #dc3545; /* Rojo en hover */
+  transform: scale(1.1); /* Ligera ampliación */
+}
+
+/* Estilo de enlaces del navbar */
+.navbar .nav-item a {
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.navbar .nav-item a:hover {
+  color: #ff9800; /* Color en hover */
+}

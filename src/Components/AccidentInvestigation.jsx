@@ -67,11 +67,12 @@ const AccidentInvestigation = () => {
         userId, // Agregar el ID del usuario que registró la investigación
         createdAt: new Date(), // Añadir la fecha de creación
         updates: [], // Añadimos el historial de actualizaciones vacío
+        status: "En Proceso" // Estado inicial del accidente
       });
 
       Swal.fire({
         icon: 'success',
-        title: '¡Investigación registrada con éxito!',
+        title: '¡Registro de Investigación creado con éxito!',
         text: 'El registro del accidente ha sido guardado.',
         confirmButtonText: 'Aceptar'
       }).then(() => {

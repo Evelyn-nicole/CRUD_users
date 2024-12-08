@@ -1,104 +1,68 @@
-  /* Styles LOGIN */
-  .login-page .login-background {
-    /* display: flex; */
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    backdrop-filter: blur(2px) !important; 
-    
-  }
-  .title-login {
-    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.9);
-    
-  }
-  /* Card styles */
-  .login-page .login-style {
-    background: rgba(243, 243, 243, 0.594);
-    border: none;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 4px 15px rgba(247, 247, 247, 0.323);
-  }
-  
-  /* Card header styles */
-  .login-page .card-header {
-    background: none;
-    border: none;
-  }
-  
-  .login-page .card-header h2 {
-    font-size: 2rem;
-    margin: 0;
-    text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.9); 
-  }
-  .training-list-title {
-    font-size: 32px; 
-    font-weight: bold;
-    color: #ffffff; 
-    text-align: center; 
-    margin-bottom: 20px; 
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Sombra para mejorar el contraste */
-  }
-  
-  /* Form styles */
-  .login-page form {
-    margin: 20px 0;
-  }
-  
-  .login-page .form-label {
-    font-weight: bold;
-  }
-  
-  .login-page .form-control {
-    border-radius: 30px;
-    padding: 10px;
-    border: none;
-    background: rgba(255, 255, 255, 0.451);
-    color: #000000;
-  }
-  
-  .login-page .form-control:focus {
-    background: rgba(237, 232, 232, 0.884);
-    box-shadow: none;
-  }
-  
-  .login-page .btn-sesion {
-    background-color: #007bff; /* Azul tipo Bootstrap primary */
-    color: #ffffff;
-    border-radius: 30px;
-    padding: 10px;
-    border: none;
-    transition: background-color 0.3s ease;
-  }
-  
-  .login-page .btn-sesion:hover {
-    background-color: #0056b3; /* Un tono más oscuro en hover */
-  }
-  
-  
-  .login-page .text-white {
-    color: white;
-  }
-  
-  /* Link styles */
-  .login-page a {
-    color: #ff9800;
-    text-decoration: none;
-  }
-  
-  .login-page a:hover {
-    color: #e67e22; /* Un color más oscuro al hacer hover */
-    text-decoration: underline;
-  }
-
-/* Estilo para el título de inicio de sesión */
-.title-login {
-  font-size: 15px; 
-  font-weight: bold;
-  color: #f6f6f6;
-  text-align: center;
-  margin-bottom: 20px;
-  text-shadow: 2px 2px 4px rgb(0, 0, 0); /* Sombra para mejor contraste */
+/* Fondo */
+.login-page .login-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  backdrop-filter: blur(2px); 
+  font-family: 'Playfair Display', serif;
 }
 
+/* Título */
+.title-login{
+  font-family: 'Playfair Display', serif;
+  font-weight: 600; 
+}
 
+/* Tarjeta de Login */
+.login-page .login-style {
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Inputs */
+.login-page .form-control {
+  border-radius: 10px;
+  padding: 15px;
+  border: 1px solid #cccccc;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333333;
+}
+
+.login-page .form-control:focus {
+  border: 1px solid #007bff;
+  background: #ffffff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Botón */
+.login-page .btn-sesion {
+  background-color: #007bff;
+  color: #ffffff;
+  border-radius: 30px;
+  padding: 12px 20px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-family: 'Playfair Display', serif;
+}
+
+.login-page .btn-sesion:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Links */
+.login-page a {
+  color: #383a3bd9;
+  text-decoration: none;
+}
+
+.login-page a:hover {
+  color: #007bff;
+  text-decoration: underline;
+}

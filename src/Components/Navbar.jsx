@@ -92,8 +92,10 @@ const Navbar = ({ user, getUser }) => {
             {/* Mostrar el nombre del usuario y botón de cerrar sesión */}
             {user && (
               <li className="nav-item m-1">
-                <div className="rounded-pill text-white bg-dark p-2">
-                  {getUser ? getUser.userName : "Cargando..."}
+                <div className="user-session">
+                  <span>
+                    {getUser ? getUser.userName.toUpperCase() : "Cargando..."}
+                  </span>
                   <button
                     onClick={userSignOut}
                     type="button"

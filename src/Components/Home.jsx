@@ -23,16 +23,16 @@ const Home = () => {
         <h2 className="section-title">¿Qué Ofrecemos?</h2>
         <div className="features-grid">
           <div className="feature">
-            <h3>Capacitaciones</h3>
+            <h3>Registros de Capacitaciones</h3>
             <p>Crea y gestiona capacitaciones personalizadas para la seguridad laboral.</p>
           </div>
           <div className="feature">
-            <h3>Formularios de Accidentes</h3>
-            <p>Optimiza la gestión de incidentes para prevenir futuros riesgos.</p>
+            <h3>Investigación de Accidentes</h3>
+            <p>Optimiza la gestión de Investigación de accidentes para prevenir futuros riesgos.</p>
           </div>
           <div className="feature">
-            <h3>MIPER</h3>
-            <p>Evalúa y gestiona riesgos laborales de manera eficaz.</p>
+            <h3>Matriz de Riesgos MIPER</h3>
+            <p>Evalúa y gestiona riesgos los riesgos laborales de manera eficaz.</p>
           </div>
         </div>
       </div>

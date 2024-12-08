@@ -22,6 +22,9 @@ import AccidentInvestigation from './Components/AccidentInvestigation';
 import AccidentList from './Components/AccidentList';
 import CreateMiper from './Components/CreateMiper';
 import ViewMiper from './Components/ViewMiper';
+import ProtectedRoute from "./Components/ProtectedRoute";
+import PublicRoute from "./Components/PublicRoute";
+import NotFound from "./Components/NotFound";
 
 
 // Inicializa Firestore y Auth
@@ -29,30 +32,44 @@ const firestore = getFirestore(app);
 const auth = getAuth(app);
 
 const App = () => {
-  const [user, setUser] = useState(null);
-  const [getUser, setGetUser] = useState(null);
+  const [user, setUser] = useState(null); // Usuario autenticado
+  const [getUser, setGetUser] = useState(null); // Datos del usuario desde Firestore
+  const [loading, setLoading] = useState(true); // Indicador de carga
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user);
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      setUser(currentUser);
+      if (!currentUser) {
+        setGetUser(null);
+        setLoading(false); // Deja de cargar si no hay usuario
+      }
     });
     return () => unsubscribe();
   }, []);
 
   useEffect(() => {
     if (user) {
-      const fetchUserName = async () => {
-        const docRef = doc(firestore, `users/${user.uid}`);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          setGetUser(docSnap.data());
+      const fetchUser = async () => {
+        try {
+          const docRef = doc(firestore, `users/${user.uid}`);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            setGetUser(docSnap.data());
+          } else {
+            console.error("No user data found");
+          }
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+        } finally {
+          setLoading(false); // Deja de cargar al finalizar la consulta
         }
       };
-      fetchUserName();
+      fetchUser();
     }
   }, [user]);
 
-  if (!getUser && user) {
+  // Mostrar un mensaje de carga mientras se obtienen los datos del usuario
+  if (loading) {
     return <div>Loading...</div>;
   }
 
@@ -61,22 +78,108 @@ const App = () => {
       <div className="App">
         <Navbar user={user} getUser={getUser} /> {/* Utiliza el componente Navbar */}
         <div className="content">
+
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/users" element={<Users />} />
-            <Route path="/create" element={<CreateUserForm />} />
-            <Route path="/training/:id" element={<Training />} />
-            <Route path="/worker-training/:id" element={<WorkerTraining />} />
-            <Route path="/create-training/:id" element={<CreateTraining />} />
-            <Route path="/view-trainings/:id" element={<ViewTrainings />} />
-            <Route path="/accident-investigation/:id" element={<AccidentInvestigation />} />
-            <Route path="/view-accidents/:id" element={<AccidentList />} />
-            <Route path="/edit-training/:trainingId" element={<EditTraining />} />
-            <Route path="/edit/:id" element={<Edit />} />
-            <Route path="/create-miper/:id" element={<CreateMiper />} />
-            <Route path="/view-miper/:id" element={<ViewMiper />}
+            <Route path="/login"
+              element={
+                <PublicRoute user={user}>
+                  <Login />
+                </PublicRoute>
+              }
             />
+            <Route path="/" element={<Home />} />
+
+
+            <Route path="/users"
+              element={
+                <ProtectedRoute
+                  user={user}
+                  getUser={getUser}
+                  allowedRoles={["admin"]}>
+                  <Users />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/create"
+              element={
+                <ProtectedRoute user={user} getUser={getUser} allowedRoles={["admin"]}>
+                  <CreateUserForm />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/training/:id"
+              element={
+                <ProtectedRoute user={user} getUser={getUser} allowedRoles={["supervisor", "prevencionista"]}>
+                  <Training />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/worker-training/:id"
+              element={
+                <ProtectedRoute user={user} getUser={getUser} allowedRoles={["trabajador"]}>
+                  <WorkerTraining />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/create-training/:id"
+              element={
+                <ProtectedRoute user={user} getUser={getUser} allowedRoles={["supervisor", "prevencionista"]}>
+                  <CreateTraining />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/view-trainings/:id"
+              element={
+                <ProtectedRoute user={user} getUser={getUser} allowedRoles={["supervisor", "prevencionista"]}>
+                  <ViewTrainings />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/accident-investigation/:id"
+              element={
+                <ProtectedRoute user={user} getUser={getUser} allowedRoles={["supervisor", "prevencionista"]}>
+                  <AccidentInvestigation />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/view-accidents/:id"
+              element={
+                <ProtectedRoute user={user} getUser={getUser} allowedRoles={["supervisor", "prevencionista"]}>
+                  <AccidentList />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/edit-training/:trainingId"
+              element={
+                <ProtectedRoute user={user} getUser={getUser} allowedRoles={["supervisor", "prevencionista"]}>
+                  <EditTraining />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/edit/:id"
+              element={
+                <ProtectedRoute user={user} getUser={getUser} allowedRoles={["admin"]}>
+                  <Edit />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/create-miper/:id"
+              element={
+                <ProtectedRoute user={user} getUser={getUser} allowedRoles={["prevencionista"]}>
+                  <CreateMiper />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/view-miper/:id"
+              element={
+                <ProtectedRoute user={user} getUser={getUser} allowedRoles={["prevencionista", "supervisor"]}>
+                  <ViewMiper user={user} getUser={getUser} />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
         <Footer />
