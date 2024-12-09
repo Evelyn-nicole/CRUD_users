@@ -95,14 +95,17 @@ const ViewMiper = ({ user, getUser }) => {
                     // Asignar colores según el valor de clasificación del riesgo
                     if (riskClassification === 'Leve') {
                         data.cell.styles.fillColor = [0, 255, 0]; // Verde
+                        data.cell.styles.textColor = 0; // Texto negro
                     } else if (riskClassification === 'Moderado') {
                         data.cell.styles.fillColor = [255, 255, 0]; // Amarillo
+                        data.cell.styles.textColor = 0; // Texto negro
                     } else if (riskClassification === 'Alto') {
                         data.cell.styles.fillColor = [255, 165, 0]; // Naranja
+                        data.cell.styles.textColor = 0; // Texto negro
                     } else if (riskClassification === 'Crítico') {
                         data.cell.styles.fillColor = [255, 0, 0]; // Rojo
+                        data.cell.styles.textColor = 255; // Texto en blanco para contraste
                     }
-                    data.cell.styles.textColor = 255; // Texto en blanco para contraste
                 }
             },
         });

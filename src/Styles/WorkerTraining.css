@@ -1,136 +1,243 @@
 /*ESTILOS VISTA WORKERTraining*/
 
 .worker-background {
-    background-image: url('../assets/perfil-trabajador.jpg'); 
-    background-size: cover; 
-    background-position: center;
-    min-height: 100vh; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    position: relative;
-  }
-  
-  .worker-background::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.2); 
-    z-index: 1; 
-  }
-  
-  .worker-content {
-    display: flex;
-    max-width: 1200px;
-    width: 100%;
-    z-index: 2;
-    justify-content: space-between;
-  }
-  
-  .worker-card {
-    background-color: rgba(255, 255, 255, 0.85); 
-    text-align: center;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    color: #090909; 
-    flex-basis: 30%;
-  }
-  
-  .worker-img-perfil {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    margin: 20px auto 10px auto;
-  }
-  .worker-card-title {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  
-  .worker-card-text {
-    font-size: 1rem;
-    margin-bottom: 5px;
-    text-align: justify;
-  }
-  
-  .worker-trainings-section {
-    flex-basis: 65%;
-    display: flex;
-    flex-direction: column;
-    background-color: rgba(255, 255, 255, 0.85);
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  }
-  
-  .worker-trainings-title {
-    font-size: 26px;
-    font-weight: bold;
-    font-family: 'Playfair Display', serif;
-    margin-bottom: 30px;
-    text-align: center;
-  }
-  
-  .worker-trainings-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-  }
-  
-  .worker-training-item {
-    background-color: rgba(255, 255, 255, 0.9);
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: left;
-  }
-  
-  .training-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .training-description {
-    font-size: 1rem;
-    margin-bottom: 15px;
-  }
-  
-  .enroll-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .no-trainings {
-    text-align: center;
-    font-size: 1.2rem;
-    color: #ff0000;
-  }
-  
-  .enroll-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .enroll-button.enrolled {
-    background-color: #dc3545;
-  }
-  
-  .enroll-button:hover:not(.enrolled) {
-    background-color: #0056b3;
-  }
-  
+  background-image: url('../assets/perfil-trabajador.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+}
 
-  
-  
-  
+.worker-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Ajuste del contenedor principal */
+.worker-content {
+  display: flex;
+  flex-wrap: nowrap; /* Evitar que los elementos salten de línea */
+  max-width: 1200px;
+  width: 100%;
+  z-index: 2;
+  max-width: 1200px;
+  width: 100%;
+  z-index: 2;
+  justify-content: space-between;
+  position: relative;
+  /* Necesario para posicionar elementos absolutos dentro del contenedor */
+  gap: 20px;
+  /* Espaciado entre elementos */
+}
+
+
+.worker-card {
+  background-color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  color: #090909;
+  flex-basis: 30%;
+}
+
+.worker-img-perfil {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 20px auto 10px auto;
+}
+
+.worker-card-title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.worker-card-text {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  text-align: justify;
+}
+
+.worker-trainings-section {
+  flex-basis: 65%;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.worker-trainings-title {
+  font-size: 26px;
+  font-weight: bold;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.worker-trainings-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.worker-training-item {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+
+.training-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.training-description {
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.enroll-button:hover {
+  background-color: #0056b3;
+}
+
+.no-trainings {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #ff0000;
+}
+
+.enroll-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.enroll-button.enrolled {
+  background-color: #dc3545;
+}
+
+.enroll-button:hover:not(.enrolled) {
+  background-color: #0056b3;
+}
+
+
+/* Tarjeta del perfil */
+.worker-card {
+  flex: 1 1 30%; /* Ocupa el 30% del ancho */
+  max-width: 350px; /* Máximo ancho */
+  min-width: 250px; /* Ancho mínimo */
+  background-color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  color: #090909;
+}
+
+/* Sección de capacitaciones disponibles */
+.worker-trainings-section {
+  flex: 2 1 60%; /* Ocupa más espacio que la tarjeta del perfil */
+  max-width: 800px; /* Máximo ancho */
+  min-width: 300px; /* Ancho mínimo */
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  margin-right: 250px; /* Dejar espacio para la sección "Mis Capacitaciones" */
+}
+
+/* Sección Mis Capacitaciones */
+.worker-enrolled-trainings-section {
+  position: absolute; /* Posicionar en relación al contenedor principal */
+  right: 20px; /* Espaciado desde la derecha */
+  width: 220px; /* Ancho fijo */
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 10;
+  text-align: left;
+}
+
+/* Título de la sección Mis Capacitaciones */
+.worker-trainings-title.small-title {
+  font-size: 0.9rem; /* Reducir aún más el tamaño del título */
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #0056b3;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+  text-align: center;
+}
+
+/* Detalles de las capacitaciones */
+.enrolled-training-item .training-title {
+  font-weight: bold;
+  color: #0056b3;
+  font-size: 0.8rem; /* Tamaño más pequeño */
+  margin-bottom: 2px;
+}
+
+
+/* Lista de capacitaciones inscritas */
+.worker-enrolled-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Espaciado entre elementos */
+}
+
+/* Elementos individuales */
+.enrolled-training-item {
+  font-size: 0.75rem;
+  color: #333;
+  padding: 5px;
+  background-color: rgba(240, 240, 240, 0.9);
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.enrolled-training-item .training-details {
+  font-size: 0.65rem;
+  color: #666;
+  margin-top: 3px;
+}
+
+/* Detalles específicos */
+.training-date,
+.training-duration,
+.training-location {
+  display: block;
+  margin-top: 2px;
+  font-style: italic;
+  color: #888;
+}

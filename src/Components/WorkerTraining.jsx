@@ -6,17 +6,17 @@ import imagePerfil from "../assets/perfil.png";
 import '../Styles/WorkerTraining.css';
 
 const WorkerTraining = () => {
-  const { id: userId } = useParams(); 
-  const [user, setUser] = useState(null); 
-  const [trainings, setTrainings] = useState([]); 
+  const { id: userId } = useParams();
+  const [user, setUser] = useState(null);
+  const [trainings, setTrainings] = useState([]);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const userDoc = doc(db, `users/${userId}`); 
-        const userSnapshot = await getDoc(userDoc); 
+        const userDoc = doc(db, `users/${userId}`);
+        const userSnapshot = await getDoc(userDoc);
         if (userSnapshot.exists()) {
-          setUser(userSnapshot.data()); 
+          setUser(userSnapshot.data());
         } else {
           console.log("No such document!");
         }
@@ -26,14 +26,14 @@ const WorkerTraining = () => {
     };
 
     if (userId) {
-      fetchUser(); 
+      fetchUser();
     }
   }, [userId]);
 
   useEffect(() => {
     const fetchTrainings = async () => {
       try {
-        const trainingsCollection = collection(db, "training"); 
+        const trainingsCollection = collection(db, "training");
         const trainingSnapshot = await getDocs(trainingsCollection);
         const trainingList = trainingSnapshot.docs.map((doc) => {
           const trainingData = doc.data();
@@ -44,8 +44,8 @@ const WorkerTraining = () => {
             isEnrolled
           };
         });
-        console.log("Trainings fetched in WorkerTraining:", trainingList); 
-        setTrainings(trainingList); 
+        console.log("Trainings fetched in WorkerTraining:", trainingList);
+        setTrainings(trainingList);
       } catch (error) {
         console.error("Error fetching trainings:", error);
       }
@@ -108,7 +108,7 @@ const WorkerTraining = () => {
           </div>
         </div>
 
-        {/* Sección para mostrar las capacitaciones */}
+        {/* Sección para mostrar las capacitaciones disponibles */}
         <div className="worker-trainings-section">
           <h3 className="worker-trainings-title">Capacitaciones Disponibles</h3>
           <div className="worker-trainings-container">
@@ -131,6 +131,57 @@ const WorkerTraining = () => {
             )}
           </div>
         </div>
+
+        {/* Sección para mostrar las capacitaciones inscritas */}
+        <div className="worker-enrolled-trainings-section">
+          <h4 className="worker-trainings-title small-title">Mis Capacitaciones</h4>
+          <ul className="worker-enrolled-list">
+            {trainings.filter((training) => training.isEnrolled).length > 0 ? (
+              trainings
+                .filter((training) => training.isEnrolled)
+                .map((training) => (
+                  <li key={training.id} className="enrolled-training-item">
+                    <span className="training-title">{capitalizeFirstLetter(training.title)}</span>
+                    <div className="training-details">
+                      {training.startDate ? (
+                        <span className="training-date">
+                          {`- Fecha Inicio: ${new Date(training.startDate).toLocaleDateString()}`}
+                        </span>
+                      ) : (
+                        <span className="training-date">Fecha Inicio: No disponible</span>
+                      )}
+                      {training.endDate ? (
+                        <span className="training-date">
+                          {` - Fecha Fin: ${new Date(training.endDate).toLocaleDateString()}`}
+                        </span>
+                      ) : (
+                        <span className="training-date">Fecha Fin: No disponible</span>
+                      )}
+                      {training.duration && (
+                        <span className="training-duration">{` - Duración: ${training.duration}`}</span>
+                      )}
+                      {training.location && (
+                        <span className="training-location">{` - Lugar: ${training.location}`}</span>
+                      )}
+                    </div>
+                  </li>
+                ))
+            ) : (
+              <p className="no-trainings">No estás inscrito en ninguna capacitación.</p>
+            )}
+          </ul>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
       </div>
     </div>
   );
