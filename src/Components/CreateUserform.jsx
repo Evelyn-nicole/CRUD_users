@@ -89,9 +89,11 @@ const CreateUserForm = () => {
         icon: 'success',
         title: 'Usuario creado exitosamente',
         showConfirmButton: false,
-        timer: 1500,
+        timer: 2000,
       });
 
+      await auth.signOut();
+      
       // Reautenticar al administrador
       await signInWithEmailAndPassword(auth, adminEmail, adminPassword);
 
